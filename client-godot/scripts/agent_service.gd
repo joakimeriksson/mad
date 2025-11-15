@@ -10,8 +10,8 @@ signal error_occurred(error_message: String)
 var http_request: HTTPRequest
 
 
-func _ready() -> void:
-	# Create HTTP request node
+func _enter_tree() -> void:
+	# Create HTTP request node early (before _ready)
 	http_request = HTTPRequest.new()
 	add_child(http_request)
 	http_request.request_completed.connect(_on_request_completed)
@@ -26,6 +26,10 @@ func send_message_to_agent(agent_type: String, message: String, poster_id: Strin
 		message: The user's message
 		poster_id: Required for poster_host agents
 	"""
+	if not http_request:
+		error_occurred.emit("HTTP request not initialized")
+		return
+
 	var request_body = {
 		"agent_type": agent_type,
 		"message": message
@@ -50,6 +54,10 @@ func send_message_to_agent(agent_type: String, message: String, poster_id: Strin
 
 func get_posters() -> void:
 	"""Fetch all available posters from the API."""
+	if not http_request:
+		error_occurred.emit("HTTP request not initialized")
+		return
+
 	var error = http_request.request(api_url + "/posters")
 
 	if error != OK:
@@ -58,6 +66,10 @@ func get_posters() -> void:
 
 func get_poster(poster_id: String) -> void:
 	"""Fetch details for a specific poster."""
+	if not http_request:
+		error_occurred.emit("HTTP request not initialized")
+		return
+
 	var error = http_request.request(api_url + "/posters/" + poster_id)
 
 	if error != OK:
@@ -66,13 +78,17 @@ func get_poster(poster_id: String) -> void:
 
 func check_health() -> void:
 	"""Check API health status."""
+	if not http_request:
+		error_occurred.emit("HTTP request not initialized")
+		return
+
 	var error = http_request.request(api_url + "/health")
 
 	if error != OK:
 		error_occurred.emit("Failed to check health: " + str(error))
 
 
-func _on_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+func _on_request_completed(result: int, response_code: int, _headers: PackedStringArray, body: PackedByteArray) -> void:
 	if result != HTTPRequest.RESULT_SUCCESS:
 		error_occurred.emit("HTTP Request failed with result: " + str(result))
 		return
