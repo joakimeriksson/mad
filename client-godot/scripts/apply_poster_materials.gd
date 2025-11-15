@@ -56,6 +56,8 @@ func _run() -> void:
 			var mesh_width = mesh_height * aspect_ratio
 			if poster_mesh.mesh is BoxMesh:
 				poster_mesh.mesh.size = Vector3(mesh_width, mesh_height, 0.05)
+			elif poster_mesh.mesh is QuadMesh:
+				poster_mesh.mesh.size = Vector2(mesh_width, mesh_height)
 
 			# Create or update material
 			var material = StandardMaterial3D.new()

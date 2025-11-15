@@ -5,8 +5,8 @@
 [sub_resource type="BoxMesh" id="BoxMesh_stand"]
 size = Vector3(0.1, 2.0, 0.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_poster"]
-size = Vector3(1.5, 2.0, 0.05)
+[sub_resource type="QuadMesh" id="QuadMesh_poster"]
+size = Vector2(1.5, 2.0)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_1"]
 size = Vector3(2.0, 2.0, 1.0)
@@ -27,7 +27,7 @@ mesh = SubResource("BoxMesh_stand")
 
 [node name="PosterMesh" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
-mesh = SubResource("BoxMesh_poster")
+mesh = SubResource("QuadMesh_poster")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
