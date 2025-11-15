@@ -1,0 +1,52 @@
+[project]
+name = "mad-backend"
+version = "0.1.0"
+description = "Multi-Agent Dungeon - Backend API service with AI agents"
+authors = ["RISE Computer Science"]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+
+[tasks]
+# Start the development server
+dev = "uvicorn app:app --reload --host 0.0.0.0 --port 8000"
+
+# Start the production server
+start = "python app.py"
+
+# Run tests
+test = "python test_api.py"
+
+# Check API health
+health = "curl http://localhost:8000/health"
+
+# List all posters
+posters = "curl http://localhost:8000/posters"
+
+[dependencies]
+python = ">=3.11,<3.13"
+fastapi = ">=0.104.0"
+uvicorn = ">=0.24.0"
+uvicorn-standard = "*"
+pydantic = ">=2.4.0"
+httpx = ">=0.25.0"
+python-dotenv = ">=1.0.0"
+pytest = ">=7.4.0"
+pytest-asyncio = ">=0.21.0"
+
+[pypi-dependencies]
+# Ollama client (not available on conda-forge)
+ollama = ">=0.1.0"
+
+[feature.ollama.dependencies]
+# Optional: dependencies for Ollama mode
+# Already included in main dependencies
+
+[feature.dev.dependencies]
+# Development tools
+black = "*"
+ruff = "*"
+mypy = "*"
+
+[environments]
+default = ["ollama"]
+dev = ["ollama", "dev"]

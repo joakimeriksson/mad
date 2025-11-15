@@ -1,224 +1,175 @@
-# Poster Data Preparation for MAD
+# Data Preparation Tools
 
-This directory contains tools for extracting, managing, and updating poster metadata for the Multi-Agent Dungeon (MAD) backend.
+Tools for generating and preparing content for the MAD project.
 
-## Overview
+## Extract from PDFs (Recommended for Real Posters) ⭐
 
-The poster import system is designed to:
-- **Import** poster data from multiple sources (CSV, JSON, PDF)
-- **Merge** new data with existing metadata intelligently
-- **Preserve** manually curated fields (FAQs, booth assignments, etc.)
-- **Track** metadata updates with timestamps and source information
-- **Validate** data integrity before updating the backend
+Automatically extract content from research poster PDFs and generate both agent data and display images.
 
-## Key Improvements
+### Requirements
 
-The import script addresses common metadata update issues:
-
-1. **Smart Merging**: When updating existing posters, manually added fields (FAQs, booth_id, room assignments) are preserved
-2. **Update Tracking**: Every poster tracks when it was created and last updated, plus the data source
-3. **Validation**: Required fields are validated before import
-4. **Flexible Sources**: Support for CSV, JSON, and (future) PDF extraction
-5. **Atomic Updates**: Backend is only updated after successful validation
-
-## Files
-
-- `extract_posters.py` - Main import script
-- `example_posters.csv` - Example CSV format for bulk import
-- `README.md` - This file
-
-## Usage
-
-### 1. Import from CSV
+**Using Pixi (Recommended)**
 
 ```bash
 cd data-prep
-python extract_posters.py --source csv --input example_posters.csv --merge
+
+# Install dependencies
+pixi install
+
+# Install poppler (system dependency, can't be managed by pixi)
+# macOS:
+brew install poppler
+
+# Linux:
+sudo apt-get install poppler-utils
+
+# Windows:
+# Download from: https://github.com/oschwartz10612/poppler-windows/releases
+```
+
+**Or using pip**
+
+```bash
+pip install pdf2image pypdf pillow
+
+# Plus install poppler (see above)
+```
+
+### Usage
+
+**Using Pixi (Recommended)**
+
+```bash
+cd data-prep
+
+# Basic usage - process all PDFs in a directory
+pixi run python extract_from_pdfs.py /path/to/poster/pdfs/
+
+# Or use the task shortcut
+pixi run extract /path/to/poster/pdfs/
+
+# Merge with existing posters (doesn't replace them)
+pixi run python extract_from_pdfs.py /path/to/pdfs/ --merge
+
+# Start numbering from a specific ID
+pixi run python extract_from_pdfs.py /path/to/pdfs/ --start-id 6
+```
+
+**Or directly with Python**
+
+```bash
+python extract_from_pdfs.py /path/to/poster/pdfs/
+python extract_from_pdfs.py /path/to/pdfs/ --merge
+python extract_from_pdfs.py /path/to/pdfs/ --start-id 6
+```
+
+### What It Does
+
+1. **Converts PDFs to PNGs** - High-quality images for Godot display
+2. **Extracts text content** - Pulls title, authors, abstract from PDF
+3. **Generates metadata** - Creates posters.json entries
+4. **Auto-detects topics** - Tags based on keywords (AI, robotics, etc.)
+5. **Ready to use** - No manual data entry needed!
+
+### Output
+
+- **PNG images** in `client-godot/assets/posters/`
+- **Updated posters.json** with extracted metadata
+- **Agent knowledge** automatically populated
+
+### Customization
+
+Edit `extract_from_pdfs.py` to improve text extraction for your poster format:
+
+```python
+# Customize parsing rules
+def parse_poster_content(text: str, poster_id: str) -> Dict:
+    # Add your custom logic here
+    # e.g., regex patterns for your specific poster template
+```
+
+### Example Workflow
+
+```bash
+# 1. Put all poster PDFs in a folder
+mkdir ~/posters
+cp my_poster1.pdf my_poster2.pdf ~/posters/
+
+# 2. Install dependencies (one time)
+cd data-prep
+pixi install
+brew install poppler  # macOS, or apt-get on Linux
+
+# 3. Extract content
+pixi run python extract_from_pdfs.py ~/posters/
+
+# 4. Review and edit the generated posters.json
+nano ../backend/data/posters.json
+
+# 5. Restart backend
+cd ../backend
+pixi run dev
+
+# 6. Apply to Godot (in Godot editor)
+# File → Run Script → apply_poster_materials.gd
+```
+
+---
+
+## Generate Placeholder Poster Images
+
+Creates simple poster images from the poster metadata (useful for testing).
+
+### Requirements
+
+```bash
+cd data-prep
+
+# Install dependencies (includes Pillow)
+pixi install
+```
+
+### Usage
+
+```bash
+# Run from the data-prep directory
+cd data-prep
+python generate_poster_images.py
 ```
 
 This will:
-- Read posters from the CSV file
-- Merge with existing `backend/posters.json` (preserving FAQs, booth assignments, etc.)
-- Update timestamps
-- Validate the result
+1. Read poster data from `backend/data/posters.json`
+2. Generate PNG images for each poster
+3. Save them to `client-godot/assets/posters/`
 
-### 2. Import from JSON
+### What Gets Generated
 
-```bash
-python extract_posters.py --source json --input new_posters.json --merge
-```
+Each poster image includes:
+- **Header** with title (white on blue background)
+- **Authors** list
+- **Tags** as bullet points
+- **Abstract** text (word-wrapped)
+- **Footer** with room and booth location
 
-The JSON file can be either:
-- An array of poster objects: `[{...}, {...}]`
-- A full posters.json structure: `{"posters": [{...}], ...}`
+### Customization
 
-### 3. Replace All Data (Use with Caution)
+Edit `generate_poster_images.py` to change:
+- Image size (default: 1200x1600)
+- Colors and fonts
+- Layout and spacing
+- Content sections
 
-```bash
-python extract_posters.py --source csv --input posters.csv --replace
-```
+### After Generation
 
-This will completely replace `backend/posters.json` with new data. **Warning**: This will lose all manually curated FAQs and booth assignments!
+1. Open your Godot project
+2. Images will auto-import in `res://assets/posters/`
+3. Apply them to poster booths:
+   - Select booth → PosterMesh
+   - Create StandardMaterial3D
+   - Load the poster image as Albedo texture
 
-### 4. Validate Existing Data
+## Future Tools
 
-```bash
-python extract_posters.py --validate
-```
-
-This validates the current `backend/posters.json` against required fields.
-
-## CSV Format
-
-The CSV file should have the following columns:
-
-| Column | Required | Description | Example |
-|--------|----------|-------------|---------|
-| `id` | Yes | Unique poster ID | `poster_001` |
-| `title` | Yes | Poster title | `Edge AI for Robotics` |
-| `authors` | Yes | Semicolon-separated authors | `Alice Johnson;Bob Smith` |
-| `tags` | Yes | Semicolon-separated tags | `edge-ai;robotics;ml` |
-| `abstract` | Yes | Poster description | `This poster presents...` |
-| `poster_image` | Yes | Godot resource path | `res://assets/posters/image.png` |
-| `keywords` | No | Semicolon-separated keywords | `cv;embedded;tensorflow` |
-| `contact_email` | No | Contact email | `alice@rise.se` |
-
-See `example_posters.csv` for a complete example.
-
-## Metadata Fields
-
-Each poster in `backend/posters.json` has the following structure:
-
-### Required Fields
-- `id`: Unique identifier
-- `title`: Full poster title
-- `authors`: Array of author names
-- `tags`: Array of topic tags (used by guide agent)
-- `abstract`: Full description
-- `poster_image`: Path to image file (Godot resource format)
-
-### Optional Fields (Preserved During Updates)
-- `faq`: Array of Q&A objects (manually curated)
-- `room`: Room identifier (e.g., "corridor_1", "room_2")
-- `booth_id`: Booth identifier (e.g., "booth_001")
-- `keywords`: Additional searchable keywords
-- `contact_email`: Author contact
-- `related_links`: Array of related resources
-
-### Metadata Tracking
-- `metadata.created_at`: When this entry was first created
-- `metadata.updated_at`: When last modified
-- `metadata.source`: Data source (e.g., "csv_import", "manual", "pdf_extract")
-- `metadata.version`: Version string
-
-## How Merging Works
-
-When you import data with `--merge` (default):
-
-1. **Load** existing `backend/posters.json`
-2. **For each imported poster**:
-   - If poster ID exists:
-     - **Update** basic fields (title, abstract, authors, tags, image)
-     - **Preserve** FAQs, booth_id, room assignments from existing data
-     - **Update** `metadata.updated_at` timestamp
-   - If poster ID is new:
-     - **Add** as new poster with `metadata.created_at` timestamp
-3. **Keep** existing posters not in import file (no deletions)
-4. **Validate** all posters
-5. **Save** to `backend/posters.json`
-
-### Example Merge Scenario
-
-Existing data (manually curated):
-```json
-{
-  "id": "poster_001",
-  "title": "Edge AI for Robotics",
-  "abstract": "Old abstract...",
-  "faq": [{"question": "Q1?", "answer": "A1"}],
-  "booth_id": "booth_001"
-}
-```
-
-Import data (from CSV):
-```json
-{
-  "id": "poster_001",
-  "title": "Edge AI for Robotics (Updated)",
-  "abstract": "New abstract with more details..."
-}
-```
-
-Result after merge:
-```json
-{
-  "id": "poster_001",
-  "title": "Edge AI for Robotics (Updated)",
-  "abstract": "New abstract with more details...",
-  "faq": [{"question": "Q1?", "answer": "A1"}],  // Preserved!
-  "booth_id": "booth_001",  // Preserved!
-  "metadata": {
-    "updated_at": "2025-11-15T12:30:00"
-  }
-}
-```
-
-## Best Practices
-
-### Regular Updates
-1. Export data from source (conference system, spreadsheet, etc.)
-2. Convert to CSV or JSON format
-3. Run import with `--merge`
-4. Validate with `--validate`
-5. Test backend functionality
-
-### Adding FAQs
-FAQs should be added manually to `backend/posters.json`:
-```json
-{
-  "id": "poster_001",
-  "faq": [
-    {
-      "question": "What hardware did you use?",
-      "answer": "We used Raspberry Pi 4 and Jetson Nano."
-    }
-  ]
-}
-```
-
-These will be preserved during subsequent imports.
-
-### Room and Booth Assignments
-Similarly, room and booth assignments can be added manually and will be preserved:
-```json
-{
-  "id": "poster_001",
-  "room": "corridor_1",
-  "booth_id": "booth_001"
-}
-```
-
-## Troubleshooting
-
-### "Missing required fields" error
-Ensure your CSV/JSON has all required fields: id, title, authors, tags, abstract, poster_image
-
-### FAQs disappearing after import
-Make sure you're using `--merge` (default) and not `--replace`
-
-### Validation fails after import
-Check the log output for specific validation errors. Common issues:
-- Missing required fields
-- Invalid JSON structure
-- Duplicate poster IDs
-
-### Import seems to ignore my updates
-Check that the poster IDs match exactly. The merge is based on ID matching.
-
-## Future Enhancements
-
-- **PDF extraction**: Automatically extract metadata from poster PDFs
-- **Image validation**: Verify poster image files exist
-- **Duplicate detection**: Find and warn about similar posters
-- **Batch operations**: Update multiple fields across all posters
-- **Data enrichment**: Auto-generate tags and keywords using LLM
+- `extract_posters.py` - Extract poster metadata from PDFs
+- `generate_faqs.py` - Generate FAQs using LLM
+- `validate_data.py` - Validate poster JSON schema

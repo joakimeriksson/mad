@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://poster_booth_001"]
+
+[ext_resource type="Script" path="res://scripts/interactable.gd" id="1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_stand"]
+size = Vector3(0.1, 2.0, 0.1)
+
+[sub_resource type="QuadMesh" id="QuadMesh_poster"]
+size = Vector2(1.5, 2.0)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1"]
+size = Vector3(2.0, 2.0, 1.0)
+
+[node name="PosterBooth" type="Area3D"]
+script = ExtResource("1")
+interaction_prompt = "Press E to talk about this poster"
+agent_type = "poster_host"
+agent_name = "Poster Host"
+
+[node name="Stand" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 1, 0)
+mesh = SubResource("BoxMesh_stand")
+
+[node name="Stand2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.8, 1, 0)
+mesh = SubResource("BoxMesh_stand")
+
+[node name="PosterMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+mesh = SubResource("QuadMesh_poster")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_1")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.7, 0)
+pixel_size = 0.005
+text = "Poster Title"
+font_size = 32
+outline_size = 8
