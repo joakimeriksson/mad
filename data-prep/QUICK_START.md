@@ -16,17 +16,20 @@ Two ways to add posters to your virtual open house:
 ```bash
 # 1. Install dependencies
 cd data-prep
-pip install -r requirements.txt
+pixi install
 
-# macOS only: Install poppler
+# Install poppler (system dependency)
+# macOS:
 brew install poppler
+# Linux:
+sudo apt-get install poppler-utils
 
 # 2. Put your PDFs in a folder
 mkdir ~/my-posters
 # Copy your PDF files there
 
 # 3. Run extraction
-python extract_from_pdfs.py ~/my-posters/
+pixi run python extract_from_pdfs.py ~/my-posters/
 
 # 4. (Optional) Edit the generated metadata
 nano ../backend/data/posters.json
@@ -58,15 +61,18 @@ pixi run dev
 **Steps:**
 
 ```bash
-# 1. Install Pillow
-pip install pillow
+# 1. Install dependencies
+cd data-prep
+pixi install
 
 # 2. Edit poster data
 nano ../backend/data/posters.json
 # Add/edit your poster metadata
 
 # 3. Generate images
-python generate_poster_images.py
+pixi run python generate_poster_images.py
+# Or use the task shortcut:
+pixi run generate
 
 # 4. Restart backend
 cd ../backend
@@ -138,8 +144,12 @@ PDFs vary widely in structure. You may need to:
 
 cd data-prep
 
+# Install dependencies (first time only)
+pixi install
+brew install poppler  # macOS
+
 # Process them (will create poster_001, poster_002, poster_003)
-python extract_from_pdfs.py ~/Downloads/
+pixi run python extract_from_pdfs.py ~/Downloads/
 
 # Verify images were created
 ls ../client-godot/assets/posters/

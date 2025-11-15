@@ -1,0 +1,49 @@
+[project]
+name = "mad-data-prep"
+version = "0.1.0"
+description = "MAD data preparation tools for poster extraction and generation"
+authors = ["RISE Computer Science"]
+channels = ["conda-forge"]
+platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
+
+[tasks]
+# Extract posters from PDFs
+extract = { cmd = "python extract_from_pdfs.py", depends_on = ["install-poppler-reminder"] }
+
+# Generate placeholder poster images
+generate = "python generate_poster_images.py"
+
+# Reminder to install poppler (can't be installed via pixi/conda on all platforms)
+install-poppler-reminder = """
+echo '
+⚠️  REMINDER: Make sure poppler is installed for PDF processing:
+   macOS:   brew install poppler
+   Linux:   sudo apt-get install poppler-utils
+   Windows: Download from https://github.com/oschwartz10612/poppler-windows/releases
+'
+"""
+
+[dependencies]
+python = ">=3.11,<3.13"
+pillow = ">=10.0.0"
+
+[pypi-dependencies]
+# PDF processing (not all available on conda-forge)
+pdf2image = ">=1.16.0"
+PyPDF2 = ">=3.0.0"
+
+[feature.ocr.pypi-dependencies]
+# Optional: for OCR-based PDF extraction
+pytesseract = ">=0.3.10"
+pdfplumber = ">=0.10.0"
+
+[feature.llm.pypi-dependencies]
+# Optional: for LLM-enhanced extraction
+openai = ">=1.0.0"
+anthropic = ">=0.7.0"
+
+[environments]
+default = []
+ocr = ["ocr"]
+llm = ["llm"]
+full = ["ocr", "llm"]

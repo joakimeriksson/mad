@@ -8,11 +8,15 @@ Automatically extract content from research poster PDFs and generate both agent 
 
 ### Requirements
 
-```bash
-# Install required packages
-pip install pdf2image pypdf pillow
+**Using Pixi (Recommended)**
 
-# Install poppler (PDF rendering library)
+```bash
+cd data-prep
+
+# Install dependencies
+pixi install
+
+# Install poppler (system dependency, can't be managed by pixi)
 # macOS:
 brew install poppler
 
@@ -23,24 +27,40 @@ sudo apt-get install poppler-utils
 # Download from: https://github.com/oschwartz10612/poppler-windows/releases
 ```
 
+**Or using pip**
+
+```bash
+pip install pdf2image pypdf pillow
+
+# Plus install poppler (see above)
+```
+
 ### Usage
+
+**Using Pixi (Recommended)**
 
 ```bash
 cd data-prep
 
 # Basic usage - process all PDFs in a directory
-python extract_from_pdfs.py /path/to/poster/pdfs/
+pixi run python extract_from_pdfs.py /path/to/poster/pdfs/
+
+# Or use the task shortcut
+pixi run extract /path/to/poster/pdfs/
 
 # Merge with existing posters (doesn't replace them)
-python extract_from_pdfs.py /path/to/pdfs/ --merge
+pixi run python extract_from_pdfs.py /path/to/pdfs/ --merge
 
 # Start numbering from a specific ID
-python extract_from_pdfs.py /path/to/pdfs/ --start-id 6
+pixi run python extract_from_pdfs.py /path/to/pdfs/ --start-id 6
+```
 
-# Custom output locations
-python extract_from_pdfs.py /path/to/pdfs/ \
-    --output-json ../backend/data/posters.json \
-    --output-images ../client-godot/assets/posters
+**Or directly with Python**
+
+```bash
+python extract_from_pdfs.py /path/to/poster/pdfs/
+python extract_from_pdfs.py /path/to/pdfs/ --merge
+python extract_from_pdfs.py /path/to/pdfs/ --start-id 6
 ```
 
 ### What It Does
@@ -75,18 +95,22 @@ def parse_poster_content(text: str, poster_id: str) -> Dict:
 mkdir ~/posters
 cp my_poster1.pdf my_poster2.pdf ~/posters/
 
-# 2. Extract content
+# 2. Install dependencies (one time)
 cd data-prep
-python extract_from_pdfs.py ~/posters/
+pixi install
+brew install poppler  # macOS, or apt-get on Linux
 
-# 3. Review and edit the generated posters.json
+# 3. Extract content
+pixi run python extract_from_pdfs.py ~/posters/
+
+# 4. Review and edit the generated posters.json
 nano ../backend/data/posters.json
 
-# 4. Restart backend
+# 5. Restart backend
 cd ../backend
 pixi run dev
 
-# 5. Apply to Godot (in Godot editor)
+# 6. Apply to Godot (in Godot editor)
 # File → Run Script → apply_poster_materials.gd
 ```
 
@@ -99,11 +123,10 @@ Creates simple poster images from the poster metadata (useful for testing).
 ### Requirements
 
 ```bash
-# Install Pillow (PIL) for image generation
-pip install pillow
+cd data-prep
 
-# Or add to your environment
-pixi add pillow
+# Install dependencies (includes Pillow)
+pixi install
 ```
 
 ### Usage
