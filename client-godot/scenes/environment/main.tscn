@@ -127,6 +127,54 @@ poster_id = "poster_005"
 [node name="Label3D" parent="Interactables/PosterBooth5" index="4"]
 text = "Sustainable Data Centers"
 
+[node name="PosterBooth6" parent="Interactables" instance=ExtResource("5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, -10)
+agent_name = "Researcher 6"
+poster_id = "poster_006"
+
+[node name="Label3D" parent="Interactables/PosterBooth6" index="4"]
+text = "Research Poster 6"
+
+[node name="PosterBooth7" parent="Interactables" instance=ExtResource("5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 5)
+agent_name = "Researcher 7"
+poster_id = "poster_007"
+
+[node name="Label3D" parent="Interactables/PosterBooth7" index="4"]
+text = "Research Poster 7"
+
+[node name="PosterBooth8" parent="Interactables" instance=ExtResource("5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, -15)
+agent_name = "Researcher 8"
+poster_id = "poster_008"
+
+[node name="Label3D" parent="Interactables/PosterBooth8" index="4"]
+text = "Research Poster 8"
+
+[node name="PosterBooth9" parent="Interactables" instance=ExtResource("5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, -15)
+agent_name = "Researcher 9"
+poster_id = "poster_009"
+
+[node name="Label3D" parent="Interactables/PosterBooth9" index="4"]
+text = "Research Poster 9"
+
+[node name="PosterBooth10" parent="Interactables" instance=ExtResource("5")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 10)
+agent_name = "Researcher 10"
+poster_id = "poster_010"
+
+[node name="Label3D" parent="Interactables/PosterBooth10" index="4"]
+text = "Research Poster 10"
+
+[node name="PosterBooth11" parent="Interactables" instance=ExtResource("5")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, 15)
+agent_name = "Researcher 11"
+poster_id = "poster_011"
+
+[node name="Label3D" parent="Interactables/PosterBooth11" index="4"]
+text = "Research Poster 11"
+
 [node name="Player" parent="." instance=ExtResource("1")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 
@@ -138,3 +186,9 @@ agent_service_path = NodePath("../AgentService")
 [editable path="Interactables/PosterBooth3"]
 [editable path="Interactables/PosterBooth4"]
 [editable path="Interactables/PosterBooth5"]
+[editable path="Interactables/PosterBooth6"]
+[editable path="Interactables/PosterBooth7"]
+[editable path="Interactables/PosterBooth8"]
+[editable path="Interactables/PosterBooth9"]
+[editable path="Interactables/PosterBooth10"]
+[editable path="Interactables/PosterBooth11"]
