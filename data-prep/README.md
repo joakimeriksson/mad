@@ -2,7 +2,113 @@
 
 Tools for generating and preparing content for the MAD project.
 
-## Extract from PDFs (Recommended for Real Posters) ⭐
+## 🚀 Unified Poster Import (RECOMMENDED) ⭐
+
+**NEW:** Use `import_posters.py` for a complete, streamlined workflow that handles PDF conversion, metadata extraction, and backend updates in one command.
+
+### Quick Start
+
+```bash
+# With vision-based extraction (most accurate, requires Ollama)
+python import_posters.py /path/to/pdfs --use-vision --merge
+
+# Without vision (text parsing fallback)
+python import_posters.py /path/to/pdfs --merge
+
+# Validate existing data
+python import_posters.py --validate
+```
+
+### Features
+
+✅ **PDF → PNG conversion** for Godot display
+✅ **Smart metadata extraction** using vision models or text parsing
+✅ **Manual overrides** via `poster_overrides.yaml`
+✅ **Intelligent merging** preserves FAQs, booth assignments, etc.
+✅ **Dual backend sync** keeps both JSON files consistent
+✅ **Full validation** ensures Godot assets match backend metadata
+✅ **Metadata tracking** records source files and timestamps
+
+### Installation
+
+```bash
+# Install Python dependencies
+pip install pdf2image pypdf pillow pyyaml requests
+
+# Install system dependencies
+# macOS:
+brew install poppler
+
+# Linux:
+sudo apt-get install poppler-utils
+
+# Optional: Install Ollama for vision-based extraction
+# Download from https://ollama.ai, then:
+ollama pull gemma3
+```
+
+### Usage Examples
+
+```bash
+# Import new posters with vision extraction
+python import_posters.py ~/Downloads/posters --use-vision --merge
+
+# Import starting from a specific ID
+python import_posters.py ~/posters --start-id 10 --merge
+
+# Replace all existing posters
+python import_posters.py ~/posters --replace --use-vision
+
+# Check everything is consistent
+python import_posters.py --validate
+```
+
+### Manual Overrides
+
+Create/edit `poster_overrides.yaml` to correct auto-extracted data:
+
+```yaml
+# Simple title correction
+my-poster-filename: "Correct Title Here"
+
+# Full metadata override
+another-poster:
+  title: "Complete Title"
+  authors: ["Author One", "Author Two"]
+  tags: ["ai", "robotics", "research"]
+  abstract: "Custom abstract text..."
+```
+
+**Key:** Use the PDF filename (without `.pdf` extension)
+
+### What It Does
+
+1. **Converts** each PDF to `client-godot/assets/posters/poster_XXX.png`
+2. **Extracts** metadata (title, authors, abstract, tags) using:
+   - Vision models (gemma3/llava) for accurate OCR
+   - Text parsing as fallback
+3. **Applies** manual overrides from YAML file
+4. **Merges** with existing data, preserving:
+   - FAQ entries
+   - Booth assignments (`booth_id`, `room`)
+   - Related links
+   - Contact info
+5. **Updates** both backend JSON files:
+   - `backend/posters.json` (structured with metadata)
+   - `backend/data/posters.json` (simple array)
+6. **Validates** consistency between Godot assets and backend
+
+### Next Steps After Import
+
+1. Review generated metadata in `backend/posters.json`
+2. Add FAQ entries, booth assignments, contact info
+3. Restart backend: `pixi run dev`
+4. In Godot: File → Run Script → `scripts/apply_poster_materials.gd`
+5. Test in game!
+
+---
+
+## Legacy: Extract from PDFs (Deprecated)
 
 Automatically extract content from research poster PDFs and generate both agent data and display images.
 
@@ -168,8 +274,24 @@ Edit `generate_poster_images.py` to change:
    - Create StandardMaterial3D
    - Load the poster image as Albedo texture
 
-## Future Tools
+## Script Reference
 
-- `extract_posters.py` - Extract poster metadata from PDFs
-- `generate_faqs.py` - Generate FAQs using LLM
-- `validate_data.py` - Validate poster JSON schema
+### Current Scripts
+
+- **`import_posters.py`** ⭐ - Unified import workflow (RECOMMENDED)
+- **`generate_poster_images.py`** - Generate placeholder images from JSON
+- **`update_godot_scene.py`** - Update Godot scene with poster titles
+- **`poster_overrides.yaml`** - Manual metadata corrections
+
+### Legacy Scripts (Deprecated)
+
+These scripts are superseded by `import_posters.py` but remain for compatibility:
+
+- `extract_from_pdfs.py` - Use `import_posters.py` instead
+- `extract_posters.py` - Merged into `import_posters.py`
+
+### Future Enhancements
+
+- `generate_faqs.py` - Auto-generate FAQs using LLM
+- Enhanced vision extraction with multiple models
+- Batch processing optimizations

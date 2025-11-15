@@ -1,5 +1,22 @@
 #!/usr/bin/env python3
 """
+DEPRECATED: This script's functionality is now integrated into import_posters.py
+
+Please use import_posters.py for new imports. It provides:
+- Unified PDF import workflow
+- Smart merging (same as this script)
+- Vision-based extraction
+- Automatic Godot asset management
+
+For validation:
+    python import_posters.py --validate
+
+For CSV/JSON import, use the unified script or integrate your data manually.
+
+This script remains for backward compatibility only.
+
+---
+
 Poster metadata extraction and update script for MAD backend.
 
 This script handles importing poster data from various sources and properly

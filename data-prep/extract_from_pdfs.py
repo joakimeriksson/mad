@@ -1,4 +1,19 @@
 """
+DEPRECATED: This script is superseded by import_posters.py
+
+Please use import_posters.py for new imports. It provides:
+- Smart merging with existing metadata
+- Vision-based extraction (optional)
+- Better consistency between Godot and backend
+- Preservation of manually curated fields
+
+Usage:
+    python import_posters.py /path/to/pdfs --use-vision --merge
+
+This script remains for backward compatibility only.
+
+---
+
 Extract poster content from PDFs for MAD project.
 
 This script:
