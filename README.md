@@ -49,6 +49,7 @@ A 3D virtual open house environment where visitors can explore research posters 
 
 - **Frontend**: Godot 4.3 (GDScript)
 - **Backend**: Python 3.11, FastAPI, Uvicorn
+- **Package Manager**: Pixi (conda-forge based)
 - **AI/LLM**: Ollama (optional), template-based fallback
 - **Data**: JSON-based poster metadata
 
@@ -56,19 +57,30 @@ A 3D virtual open house environment where visitors can explore research posters 
 
 ### Prerequisites
 
-- Python 3.11+
-- Godot 4.3+ (download from https://godotengine.org)
-- (Optional) Ollama for LLM-powered agents
+- **Pixi** (recommended) or Python 3.11+
+- **Godot 4.3+** (download from https://godotengine.org)
+- (Optional) **Ollama** for LLM-powered agents
 
 ### 1. Start the Backend
+
+**Using Pixi (Recommended)**
 
 ```bash
 cd backend
 
-# Install dependencies
-pip install -r requirements.txt
+# Install pixi if needed
+curl -fsSL https://pixi.sh/install.sh | bash
 
-# Start the server
+# Install dependencies and run
+pixi install
+pixi run dev
+```
+
+**Or using pip**
+
+```bash
+cd backend
+pip install -r requirements.txt
 python app.py
 ```
 

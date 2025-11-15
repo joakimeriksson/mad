@@ -11,14 +11,39 @@ Python FastAPI backend for the Multi-Agent Dungeon open house virtual environmen
 
 ## Setup
 
-### 1. Install Dependencies
+### 1. Install Pixi (Recommended)
+
+Pixi is a modern package manager that provides better dependency management:
+
+```bash
+# Install pixi (https://pixi.sh)
+curl -fsSL https://pixi.sh/install.sh | bash
+
+# Or on macOS with Homebrew
+brew install pixi
+```
+
+### 2. Install Dependencies
+
+**Option A: Using Pixi (Recommended)**
+
+```bash
+cd backend
+
+# Install all dependencies and create environment
+pixi install
+
+# That's it! Pixi manages everything.
+```
+
+**Option B: Using pip (Alternative)**
 
 ```bash
 cd backend
 pip install -r requirements.txt
 ```
 
-### 2. Configure Environment
+### 3. Configure Environment
 
 Copy `.env.example` to `.env` and configure:
 
@@ -37,7 +62,7 @@ OLLAMA_MODEL=llama2
 AGENT_MODE=simple
 ```
 
-### 3. Install Ollama (Optional)
+### 4. Install Ollama (Optional)
 
 If you want LLM-powered agents:
 
@@ -45,7 +70,19 @@ If you want LLM-powered agents:
 2. Pull a model: `ollama pull llama2` (or llama3, mistral, etc.)
 3. Verify it's running: `ollama list`
 
-### 4. Run the Server
+### 5. Run the Server
+
+**Using Pixi (Recommended)**
+
+```bash
+# Start in development mode with auto-reload
+pixi run dev
+
+# Or start in production mode
+pixi run start
+```
+
+**Using Python directly**
 
 ```bash
 python app.py
@@ -57,6 +94,22 @@ uvicorn app:app --reload --host 0.0.0.0 --port 8000
 ```
 
 The API will be available at `http://localhost:8000`
+
+### Quick Commands with Pixi
+
+```bash
+# Run tests
+pixi run test
+
+# Check API health
+pixi run health
+
+# List posters
+pixi run posters
+
+# Run in dev mode with auto-reload
+pixi run dev
+```
 
 ## API Endpoints
 
