@@ -62,7 +62,7 @@ def encode_image_base64(image_path: Path) -> str:
         return base64.b64encode(image_file.read()).decode("utf-8")
 
 
-def extract_metadata_from_image(image_path: Path, model: str = "llama3.2-vision:latest") -> Dict:
+def extract_metadata_from_image(image_path: Path, model: str = "gemma3:latest") -> Dict:
     """
     Use Ollama vision model to extract metadata from poster image.
 
@@ -239,8 +239,8 @@ def main():
     )
     parser.add_argument(
         "--model",
-        default="llama3.2-vision:latest",
-        help="Ollama vision model to use (default: llama3.2-vision:latest)"
+        default="gemma3:latest",
+        help="Ollama vision model to use (default: gemma3:latest)"
     )
     parser.add_argument(
         "--start-id",
@@ -267,7 +267,7 @@ def main():
         print("\nPlease start Ollama first:")
         print("  1. Install Ollama from https://ollama.ai")
         print("  2. Run: ollama serve")
-        print("  3. Pull a vision model: ollama pull llama3.2-vision")
+        print("  3. Pull a vision model: ollama pull gemma3")
         sys.exit(1)
 
     # Check for vision models
@@ -275,13 +275,9 @@ def main():
     if not available_models:
         print("⚠ Warning: No vision models found in Ollama")
         print("\nPlease pull a vision model:")
-        print("  ollama pull llama3.2-vision")
+        print("  ollama pull gemma3")
         print("  # or")
         print("  ollama pull llava")
-        print("\nAvailable vision models:")
-        print("  - llama3.2-vision (recommended, 11B)")
-        print("  - llama3.2-vision:90b (more accurate, slower)")
-        print("  - llava (alternative)")
         sys.exit(1)
 
     print(f"✓ Ollama is running")

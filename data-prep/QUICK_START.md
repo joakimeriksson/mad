@@ -13,8 +13,7 @@ Three ways to add posters to your virtual open house:
 - Agents get actual research content
 
 **Requirements:**
-- Ollama with a vision model (llama3.2-vision, NOT Gemma 3)
-- Note: Gemma 3 does NOT support vision. Use llama3.2-vision instead.
+- Ollama with a vision model (gemma3 recommended)
 
 **Steps:**
 
@@ -34,8 +33,8 @@ sudo apt-get install poppler-utils
 # Linux: curl -fsSL https://ollama.ai/install.sh | sh
 ollama serve  # Run in a separate terminal
 
-# 3. Pull a vision model (NOT Gemma 3!)
-ollama pull llama3.2-vision  # Recommended
+# 3. Pull a vision model
+ollama pull gemma3  # Recommended
 # OR: ollama pull llava
 
 # 4. Put your PDFs in a folder

@@ -12,23 +12,15 @@ Traditional text-based PDF extraction struggles with:
 
 **Vision models** look at the poster image like a human would and extract the correct information.
 
-## Important: Model Selection
-
-### ❌ Gemma 3 Does NOT Support Vision
-
-**Gemma 3** (and all Gemma models) are **text-only** models and **cannot** analyze images.
-
-### ✅ Recommended Vision Models
+## Recommended Vision Models
 
 Use one of these vision-capable models with Ollama:
 
-1. **llama3.2-vision** (Recommended)
+1. **gemma3** (Recommended)
    ```bash
-   ollama pull llama3.2-vision
+   ollama pull gemma3
    ```
    - Fast and accurate
-   - 11B parameters (good balance)
-   - Also available: `llama3.2-vision:90b` (more accurate, slower)
 
 2. **llava**
    ```bash
@@ -69,7 +61,7 @@ ollama serve
 
 ```bash
 # Recommended
-ollama pull llama3.2-vision
+ollama pull gemma3
 
 # Or try llava
 ollama pull llava
@@ -118,7 +110,7 @@ cd data-prep
 pixi run python extract_with_vision.py ~/poster-images/
 
 # Use a specific model
-pixi run python extract_with_vision.py ~/poster-images/ --model llama3.2-vision:90b
+pixi run python extract_with_vision.py ~/poster-images/ --model llava
 
 # Merge with existing data
 pixi run python extract_with_vision.py ~/poster-images/ --merge
@@ -210,7 +202,7 @@ ollama pull llama3.2-vision
 Some models need more specific prompts. Try a different model:
 
 ```bash
-pixi run python extract_from_pdfs.py ~/posters/ --use-vision --vision-model llava
+pixi run python extract_from_pdfs.py ~/posters/ --use-vision --vision-model gemma3
 ```
 
 ### Vision extraction failed
@@ -226,8 +218,7 @@ The script will automatically fall back to text extraction. Check:
 2. **Review the output** - Check `backend/data/posters.json`
 3. **Add overrides for edge cases** - Some posters may still need manual fixes
 4. **Choose the right model**:
-   - Fast iteration: `llama3.2-vision`
-   - Best accuracy: `llama3.2-vision:90b`
+   - Recommended: `gemma3`
    - Alternatives: `llava`, `minicpm-v`
 
 ## Integration with Godot
