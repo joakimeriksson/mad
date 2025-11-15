@@ -7,11 +7,20 @@ channels = ["conda-forge"]
 platforms = ["linux-64", "osx-64", "osx-arm64", "win-64"]
 
 [tasks]
-# Extract posters from PDFs
-extract = { cmd = "python extract_from_pdfs.py", depends-on = ["install-poppler-reminder"] }
+# Import posters from PDFs (RECOMMENDED - unified workflow)
+import = { cmd = "python import_posters.py", depends-on = ["install-poppler-reminder"] }
+
+# Import with vision-based extraction (requires Ollama)
+import-vision = { cmd = "python import_posters.py --use-vision", depends-on = ["install-poppler-reminder", "ollama-reminder"] }
+
+# Validate existing poster metadata
+validate = "python import_posters.py --validate"
 
 # Generate placeholder poster images
 generate = "python generate_poster_images.py"
+
+# Legacy: Extract posters from PDFs (DEPRECATED - use 'import' instead)
+extract = { cmd = "python extract_from_pdfs.py", depends-on = ["install-poppler-reminder"] }
 
 # Reminder to install poppler (can't be installed via pixi/conda on all platforms)
 install-poppler-reminder = """
@@ -20,6 +29,16 @@ echo '
    macOS:   brew install poppler
    Linux:   sudo apt-get install poppler-utils
    Windows: Download from https://github.com/oschwartz10612/poppler-windows/releases
+'
+"""
+
+# Reminder to install Ollama for vision-based extraction
+ollama-reminder = """
+echo '
+ℹ️  Vision-based extraction requires Ollama:
+   1. Install from https://ollama.ai
+   2. Run: ollama serve
+   3. Pull model: ollama pull gemma3
 '
 """
 

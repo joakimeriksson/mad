@@ -9,13 +9,15 @@ Tools for generating and preparing content for the MAD project.
 ### Quick Start
 
 ```bash
-# With vision-based extraction (most accurate, requires Ollama)
+# Using pixi (recommended - manages dependencies automatically)
+cd data-prep
+pixi run import /path/to/pdfs --merge              # Text parsing
+pixi run import-vision /path/to/pdfs --merge       # Vision extraction (requires Ollama)
+pixi run validate                                  # Validate metadata
+
+# Or using Python directly
 python import_posters.py /path/to/pdfs --use-vision --merge
-
-# Without vision (text parsing fallback)
 python import_posters.py /path/to/pdfs --merge
-
-# Validate existing data
 python import_posters.py --validate
 ```
 
@@ -50,16 +52,25 @@ ollama pull gemma3
 ### Usage Examples
 
 ```bash
+# Using pixi (recommended)
+cd data-prep
+
 # Import new posters with vision extraction
-python import_posters.py ~/Downloads/posters --use-vision --merge
+pixi run import-vision ~/Downloads/posters --merge
 
 # Import starting from a specific ID
-python import_posters.py ~/posters --start-id 10 --merge
+pixi run import ~/posters --start-id 10 --merge
 
 # Replace all existing posters
-python import_posters.py ~/posters --replace --use-vision
+pixi run import-vision ~/posters --replace
 
 # Check everything is consistent
+pixi run validate
+
+# Or using Python directly
+python import_posters.py ~/Downloads/posters --use-vision --merge
+python import_posters.py ~/posters --start-id 10 --merge
+python import_posters.py ~/posters --replace --use-vision
 python import_posters.py --validate
 ```
 
@@ -273,6 +284,25 @@ Edit `generate_poster_images.py` to change:
    - Select booth → PosterMesh
    - Create StandardMaterial3D
    - Load the poster image as Albedo texture
+
+## Pixi Tasks
+
+The project includes convenient pixi tasks for common operations:
+
+```bash
+cd data-prep
+
+# Main tasks
+pixi run import <pdf-dir> [--merge]           # Import posters (text parsing)
+pixi run import-vision <pdf-dir> [--merge]    # Import with vision extraction
+pixi run validate                             # Validate metadata consistency
+pixi run generate                             # Generate placeholder images
+
+# Legacy task (deprecated)
+pixi run extract <pdf-dir>                    # Old extraction script
+```
+
+**Note:** Pixi automatically manages Python dependencies. You still need to install system dependencies (poppler) manually.
 
 ## Script Reference
 
