@@ -54,7 +54,7 @@ def check_ollama_available() -> bool:
         return False
 
 
-def extract_metadata_with_vision(image_path: Path, model: str = "llama3.2-vision:latest") -> Optional[Dict]:
+def extract_metadata_with_vision(image_path: Path, model: str = "gemma3:latest") -> Optional[Dict]:
     """Use Ollama vision model to extract metadata from poster image."""
     if not VISION_AVAILABLE:
         return None
@@ -315,7 +315,7 @@ def process_poster_pdfs(
     start_id: int = 1,
     overrides: Optional[Dict] = None,
     use_vision: bool = False,
-    vision_model: str = "llama3.2-vision:latest"
+    vision_model: str = "gemma3:latest"
 ) -> List[Dict]:
     """Process all PDFs in a directory."""
 
@@ -456,8 +456,8 @@ def main():
     parser.add_argument(
         '--vision-model',
         type=str,
-        default='llama3.2-vision:latest',
-        help='Vision model to use with Ollama (default: llama3.2-vision:latest). Note: Gemma 3 does not have vision capabilities. Use llama3.2-vision, llava, or minicpm-v for vision tasks.'
+        default='gemma3:latest',
+        help='Vision model to use with Ollama (default: gemma3:latest)'
     )
 
     args = parser.parse_args()
@@ -475,9 +475,8 @@ def main():
             print("  1. Install from https://ollama.ai")
             print("  2. Run: ollama serve")
             print("  3. Pull a vision model:")
-            print("     ollama pull llama3.2-vision    (recommended)")
+            print("     ollama pull gemma3    (recommended)")
             print("     ollama pull llava")
-            print("\nNote: Gemma 3 does NOT support vision. Use llama3.2-vision instead.")
             return
 
         print(f"✓ Vision mode enabled with model: {args.vision_model}")
