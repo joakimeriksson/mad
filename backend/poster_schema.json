@@ -1,0 +1,134 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Poster Metadata Schema",
+  "description": "Schema for poster metadata used by MAD backend and Godot client",
+  "type": "object",
+  "properties": {
+    "posters": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the poster"
+          },
+          "title": {
+            "type": "string",
+            "description": "Full title of the poster/demo"
+          },
+          "authors": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "List of author names"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tags/topics for categorization (e.g., 'robotics', 'edge-ai', 'security')"
+          },
+          "abstract": {
+            "type": "string",
+            "description": "Abstract or description of the poster/demo"
+          },
+          "poster_image": {
+            "type": "string",
+            "description": "Path to poster image file (relative to Godot assets)"
+          },
+          "faq": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "question": {
+                  "type": "string"
+                },
+                "answer": {
+                  "type": "string"
+                }
+              },
+              "required": ["question", "answer"]
+            },
+            "description": "Frequently asked questions about this poster"
+          },
+          "room": {
+            "type": "string",
+            "description": "Room identifier where this poster is located"
+          },
+          "booth_id": {
+            "type": "string",
+            "description": "Specific booth identifier within the room"
+          },
+          "contact_email": {
+            "type": "string",
+            "format": "email",
+            "description": "Contact email for the poster authors"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Additional keywords for search and matching"
+          },
+          "related_links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "url": {
+                  "type": "string",
+                  "format": "uri"
+                }
+              },
+              "required": ["title", "url"]
+            },
+            "description": "Related links, papers, or resources"
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "created_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When this metadata was created"
+              },
+              "updated_at": {
+                "type": "string",
+                "format": "date-time",
+                "description": "When this metadata was last updated"
+              },
+              "source": {
+                "type": "string",
+                "description": "Source of the metadata (e.g., 'manual', 'extracted', 'api')"
+              },
+              "version": {
+                "type": "string",
+                "description": "Version of this metadata entry"
+              }
+            },
+            "description": "Metadata about the metadata (for tracking updates)"
+          }
+        },
+        "required": ["id", "title", "authors", "tags", "abstract", "poster_image"]
+      }
+    },
+    "schema_version": {
+      "type": "string",
+      "description": "Version of this schema"
+    },
+    "last_updated": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the posters.json file was last updated"
+    }
+  },
+  "required": ["posters", "schema_version", "last_updated"]
+}

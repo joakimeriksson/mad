@@ -1,0 +1,185 @@
+{
+  "schema_version": "1.0",
+  "last_updated": "2025-11-15T12:31:43.113580",
+  "posters": [
+    {
+      "id": "poster_001",
+      "title": "Edge AI for Robotics",
+      "authors": [
+        "Alice Johnson",
+        "Bob Smith"
+      ],
+      "tags": [
+        "edge-ai",
+        "robotics",
+        "machine-learning"
+      ],
+      "abstract": "This poster presents a novel approach to deploying AI models on edge devices for robotic applications. We demonstrate real-time object detection and path planning on resource-constrained hardware.",
+      "poster_image": "res://assets/posters/edge_ai_robotics.png",
+      "keywords": [
+        "computer-vision",
+        "embedded-systems",
+        "tensorflow-lite"
+      ],
+      "contact_email": "alice.johnson@rise.se",
+      "room": "corridor_1",
+      "booth_id": "booth_001",
+      "faq": [
+        {
+          "question": "What hardware platforms did you test on?",
+          "answer": "We tested on Raspberry Pi 4, NVIDIA Jetson Nano, and Google Coral Dev Board."
+        },
+        {
+          "question": "What are the typical inference times?",
+          "answer": "Object detection runs at 30 FPS on Jetson Nano and 15 FPS on Raspberry Pi 4."
+        },
+        {
+          "question": "Is the code open source?",
+          "answer": "Yes, our implementation is available on GitHub under MIT license."
+        }
+      ],
+      "related_links": [
+        {
+          "title": "GitHub Repository",
+          "url": "https://github.com/rise/edge-ai-robotics"
+        },
+        {
+          "title": "Research Paper",
+          "url": "https://arxiv.org/example/edge-ai-robotics"
+        }
+      ],
+      "metadata": {
+        "created_at": "2025-11-15T09:00:00.000000",
+        "updated_at": "2025-11-15T12:31:43.113381",
+        "source": "csv_import",
+        "version": "1.0"
+      }
+    },
+    {
+      "id": "poster_002",
+      "title": "Secure Multi-Party Computation",
+      "authors": [
+        "Carol White",
+        "David Brown"
+      ],
+      "tags": [
+        "security",
+        "cryptography",
+        "privacy"
+      ],
+      "abstract": "We introduce a new protocol for secure multi-party computation that enables collaborative data analysis while preserving privacy. Our method achieves 40% better performance than existing approaches.",
+      "poster_image": "res://assets/posters/secure_mpc.png",
+      "keywords": [
+        "privacy-preserving",
+        "distributed-systems",
+        "cryptography"
+      ],
+      "contact_email": "carol.white@rise.se",
+      "room": "room_1",
+      "booth_id": "booth_002",
+      "faq": [
+        {
+          "question": "What cryptographic primitives do you use?",
+          "answer": "Our protocol is based on garbled circuits and oblivious transfer with optimizations for specific use cases."
+        },
+        {
+          "question": "How many parties can participate?",
+          "answer": "Our current implementation supports 2-10 parties, with plans to scale to larger groups."
+        }
+      ],
+      "metadata": {
+        "created_at": "2025-11-15T09:00:00.000000",
+        "updated_at": "2025-11-15T12:31:43.113445",
+        "source": "csv_import",
+        "version": "1.0"
+      }
+    },
+    {
+      "id": "poster_003",
+      "title": "5G Network Slicing for IoT",
+      "authors": [
+        "Eve Davis",
+        "Frank Miller"
+      ],
+      "tags": [
+        "5g",
+        "iot",
+        "networking"
+      ],
+      "abstract": "This work explores network slicing techniques in 5G networks optimized for IoT deployments. We present a dynamic resource allocation algorithm that improves latency by 60%.",
+      "poster_image": "res://assets/posters/5g_iot_slicing.png",
+      "keywords": [
+        "network-optimization",
+        "edge-computing",
+        "iot"
+      ],
+      "contact_email": "eve.davis@rise.se",
+      "room": "corridor_1",
+      "booth_id": "booth_003",
+      "faq": [
+        {
+          "question": "What IoT use cases did you test?",
+          "answer": "We tested with smart city sensors, industrial IoT, and connected vehicle scenarios."
+        }
+      ],
+      "metadata": {
+        "created_at": "2025-11-15T09:00:00.000000",
+        "updated_at": "2025-11-15T12:31:43.113493",
+        "source": "csv_import",
+        "version": "1.0"
+      }
+    },
+    {
+      "id": "poster_004",
+      "title": "Explainable AI in Healthcare",
+      "authors": [
+        "Grace Lee",
+        "Henry Wilson"
+      ],
+      "tags": [
+        "ai",
+        "healthcare",
+        "explainability"
+      ],
+      "abstract": "We developed an explainable AI framework for medical diagnosis that provides interpretable insights to clinicians. Our system has been validated on real patient data with 95% accuracy.",
+      "poster_image": "res://assets/posters/xai_healthcare.png",
+      "metadata": {
+        "source": "csv_import",
+        "created_at": "2025-11-15T12:31:43.113526",
+        "updated_at": "2025-11-15T12:31:43.113526"
+      },
+      "keywords": [
+        "medical-ai",
+        "interpretability",
+        "neural-networks"
+      ],
+      "contact_email": "grace.lee@rise.se"
+    },
+    {
+      "id": "poster_005",
+      "title": "Autonomous Drone Navigation",
+      "authors": [
+        "Ivan Chen",
+        "Julia Martinez"
+      ],
+      "tags": [
+        "robotics",
+        "drones",
+        "autonomous-systems"
+      ],
+      "abstract": "This poster showcases our autonomous navigation system for drones in GPS-denied environments. Using visual-inertial odometry and SLAM, drones can navigate complex indoor spaces.",
+      "poster_image": "res://assets/posters/autonomous_drones.png",
+      "metadata": {
+        "source": "csv_import",
+        "created_at": "2025-11-15T12:31:43.113557",
+        "updated_at": "2025-11-15T12:31:43.113557"
+      },
+      "keywords": [
+        "slam",
+        "computer-vision",
+        "path-planning"
+      ],
+      "contact_email": "ivan.chen@rise.se"
+    }
+  ]
+}
