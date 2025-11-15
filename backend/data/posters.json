@@ -1,0 +1,102 @@
+[
+  {
+    "id": "poster_001",
+    "title": "Edge AI for Autonomous Robotics",
+    "authors": ["Dr. Anna Karlsson", "Prof. Erik Lindgren"],
+    "tags": ["edge-ai", "robotics", "machine-learning", "autonomous-systems"],
+    "room": "corridor",
+    "booth_id": "booth_1",
+    "abstract": "This research explores efficient deep learning models optimized for edge devices in autonomous robotic systems. We present a novel compression technique that reduces model size by 80% while maintaining 95% accuracy, enabling real-time object detection on resource-constrained hardware.",
+    "poster_image": "res://assets/posters/poster_001.png",
+    "faq": [
+      {
+        "question": "What hardware did you test on?",
+        "answer": "We tested on Raspberry Pi 4, NVIDIA Jetson Nano, and custom FPGA implementations."
+      },
+      {
+        "question": "How does this compare to existing solutions?",
+        "answer": "Our approach achieves 3x faster inference times compared to standard MobileNet while using 40% less memory."
+      }
+    ]
+  },
+  {
+    "id": "poster_002",
+    "title": "Federated Learning for Privacy-Preserving Healthcare",
+    "authors": ["Dr. Maria Chen", "Dr. Johan Svensson"],
+    "tags": ["federated-learning", "privacy", "healthcare", "machine-learning"],
+    "room": "room_1",
+    "booth_id": "booth_2",
+    "abstract": "We present a federated learning framework that enables collaborative model training across hospitals without sharing sensitive patient data. Our differential privacy guarantees ensure that individual patient information cannot be reconstructed while achieving diagnostic accuracy comparable to centralized training.",
+    "poster_image": "res://assets/posters/poster_002.png",
+    "faq": [
+      {
+        "question": "What diseases did you focus on?",
+        "answer": "We focused on diabetic retinopathy detection and early-stage cancer classification from medical imaging."
+      },
+      {
+        "question": "How many hospitals participated?",
+        "answer": "Our pilot study included 12 hospitals across Sweden, with a total dataset of over 50,000 patient records."
+      }
+    ]
+  },
+  {
+    "id": "poster_003",
+    "title": "Quantum-Resistant Cryptography for IoT",
+    "authors": ["Prof. Lars Bergström", "Dr. Sofia Andersson"],
+    "tags": ["cryptography", "iot", "security", "quantum-computing"],
+    "room": "room_1",
+    "booth_id": "booth_3",
+    "abstract": "As quantum computers threaten current encryption standards, we propose a lightweight post-quantum cryptographic protocol specifically designed for IoT devices. Our lattice-based approach provides security against quantum attacks while maintaining low computational overhead suitable for battery-powered sensors.",
+    "poster_image": "res://assets/posters/poster_003.png",
+    "faq": [
+      {
+        "question": "When will quantum computers break current encryption?",
+        "answer": "Estimates suggest 10-15 years, but we need to deploy quantum-resistant solutions now since encrypted data can be harvested today and decrypted later."
+      },
+      {
+        "question": "What's the performance impact?",
+        "answer": "Our protocol adds only 15ms latency on typical IoT devices, which is acceptable for most use cases."
+      }
+    ]
+  },
+  {
+    "id": "poster_004",
+    "title": "Human-Robot Collaboration in Manufacturing",
+    "authors": ["Dr. Anders Nilsson", "Dr. Emma Johansson"],
+    "tags": ["robotics", "hri", "manufacturing", "safety"],
+    "room": "corridor",
+    "booth_id": "booth_4",
+    "abstract": "This work investigates safe and efficient collaboration between humans and industrial robots in shared workspaces. We developed a predictive motion planning algorithm that anticipates human movements and adjusts robot trajectories in real-time to prevent collisions while maximizing productivity.",
+    "poster_image": "res://assets/posters/poster_004.png",
+    "faq": [
+      {
+        "question": "How do you ensure safety?",
+        "answer": "We use a combination of computer vision, depth sensors, and predictive models to maintain safe distances. The system has multiple fallback layers including emergency stops."
+      },
+      {
+        "question": "What industries can benefit?",
+        "answer": "Automotive assembly, electronics manufacturing, and warehouse logistics are prime candidates for this technology."
+      }
+    ]
+  },
+  {
+    "id": "poster_005",
+    "title": "Sustainable Data Centers: AI-Driven Cooling Optimization",
+    "authors": ["Dr. Karin Pettersson", "Prof. Michael Holm"],
+    "tags": ["sustainability", "data-centers", "ai", "energy-efficiency"],
+    "room": "room_2",
+    "booth_id": "booth_5",
+    "abstract": "Data centers consume enormous amounts of energy for cooling. Our reinforcement learning system optimizes HVAC operations in real-time, reducing cooling energy consumption by up to 35% while maintaining strict temperature and humidity requirements. The system learns from historical data and weather forecasts to preemptively adjust cooling strategies.",
+    "poster_image": "res://assets/posters/poster_005.png",
+    "faq": [
+      {
+        "question": "What's the payback period for implementation?",
+        "answer": "Based on pilot deployments, organizations see ROI within 8-12 months through reduced energy costs."
+      },
+      {
+        "question": "Does it work with existing infrastructure?",
+        "answer": "Yes, our solution integrates with standard building management systems and doesn't require hardware replacement."
+      }
+    ]
+  }
+]
