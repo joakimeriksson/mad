@@ -8,6 +8,9 @@ PyYAML>=6.0
 # For image generation
 Pillow>=10.0.0
 
+# For vision-based extraction (optional)
+requests>=2.31.0
+
 # For enhanced text extraction (optional)
 # pdfplumber>=0.10.0
 # pytesseract>=0.3.10  # For OCR if PDFs have images

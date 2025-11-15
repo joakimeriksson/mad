@@ -1,15 +1,20 @@
 # Quick Start: Adding Posters to MAD
 
-Two ways to add posters to your virtual open house:
+Three ways to add posters to your virtual open house:
 
-## Method 1: From PDF Files (Real Research Posters) ⭐
+## Method 1: From PDF Files with Vision AI (Most Accurate!) ⭐⭐⭐
 
-**Use this when:** You have actual research poster PDFs
+**Use this when:** You have actual research poster PDFs and want accurate title extraction
 
 **Pros:**
 - Uses real poster images (looks professional)
-- Auto-extracts metadata (less manual work)
+- **Vision AI extracts accurate titles, authors, and abstracts**
+- No more wrong titles like "RISE Research Institute"!
 - Agents get actual research content
+
+**Requirements:**
+- Ollama with a vision model (llama3.2-vision, NOT Gemma 3)
+- Note: Gemma 3 does NOT support vision. Use llama3.2-vision instead.
 
 **Steps:**
 
@@ -24,15 +29,53 @@ brew install poppler
 # Linux:
 sudo apt-get install poppler-utils
 
-# 2. Put your PDFs in a folder
+# 2. Install and start Ollama
+# macOS: brew install ollama
+# Linux: curl -fsSL https://ollama.ai/install.sh | sh
+ollama serve  # Run in a separate terminal
+
+# 3. Pull a vision model (NOT Gemma 3!)
+ollama pull llama3.2-vision  # Recommended
+# OR: ollama pull llava
+
+# 4. Put your PDFs in a folder
 mkdir ~/my-posters
 # Copy your PDF files there
 
-# 3. Run extraction
+# 5. Run extraction WITH VISION
+pixi run python extract_from_pdfs.py ~/my-posters/ --use-vision
+
+# Vision model will read the poster images and extract accurate metadata!
+
+# 6. Restart backend
+cd ../backend
+pixi run dev
+```
+
+**See VISION_EXTRACTION.md for more details!**
+
+## Method 2: From PDF Files (Text-Only, Fallback)
+
+**Use this when:** You don't have Ollama or want faster extraction
+
+**Steps:**
+
+```bash
+# 1. Install dependencies
+cd data-prep
+pixi install
+
+# Install poppler
+brew install poppler  # macOS
+
+# 2. Put your PDFs in a folder
+mkdir ~/my-posters
+
+# 3. Run extraction (no vision)
 pixi run python extract_from_pdfs.py ~/my-posters/
 
-# 4. (Optional) Edit the generated metadata
-nano ../backend/data/posters.json
+# 4. Fix titles manually in poster_overrides.yaml or posters.json
+nano poster_overrides.yaml
 
 # 5. Restart backend
 cd ../backend
@@ -46,7 +89,7 @@ pixi run dev
 
 ---
 
-## Method 2: Generate Placeholder Images
+## Method 3: Generate Placeholder Images
 
 **Use this when:**
 - Testing the system

@@ -34,6 +34,81 @@ except ImportError:
     print("  Linux: sudo apt-get install poppler-utils")
     exit(1)
 
+# Optional: vision-based extraction
+try:
+    import requests
+    import base64
+    VISION_AVAILABLE = True
+except ImportError:
+    VISION_AVAILABLE = False
+
+
+def check_ollama_available() -> bool:
+    """Check if Ollama is running."""
+    if not VISION_AVAILABLE:
+        return False
+    try:
+        response = requests.get("http://localhost:11434/api/tags", timeout=2)
+        return response.status_code == 200
+    except:
+        return False
+
+
+def extract_metadata_with_vision(image_path: Path, model: str = "llama3.2-vision:latest") -> Optional[Dict]:
+    """Use Ollama vision model to extract metadata from poster image."""
+    if not VISION_AVAILABLE:
+        return None
+
+    try:
+        # Encode image
+        with open(image_path, "rb") as image_file:
+            image_base64 = base64.b64encode(image_file.read()).decode("utf-8")
+
+        # Prompt for structured extraction
+        prompt = """You are analyzing a research poster image. Extract the following information in JSON format:
+
+{
+  "title": "The main title of the poster",
+  "authors": ["Author 1", "Author 2"],
+  "tags": ["topic1", "topic2", "topic3"],
+  "abstract": "A brief summary (2-3 sentences)"
+}
+
+Rules:
+- For title: Extract ONLY the main title, not institution names
+- For authors: List all author names you can clearly read
+- For tags: Identify 3-5 key research topics
+- For abstract: Summarize the main contribution in 2-3 sentences
+- Return ONLY valid JSON
+
+Analyze this poster:"""
+
+        # Call Ollama API
+        response = requests.post(
+            "http://localhost:11434/api/generate",
+            json={
+                "model": model,
+                "prompt": prompt,
+                "images": [image_base64],
+                "stream": False,
+                "format": "json"
+            },
+            timeout=60
+        )
+
+        if response.status_code != 200:
+            return None
+
+        result = response.json()
+        response_text = result.get("response", "")
+
+        # Parse JSON
+        return json.loads(response_text)
+
+    except Exception as e:
+        print(f"  Vision extraction error: {e}")
+        return None
+
 
 def load_overrides(overrides_file: Path) -> Dict:
     """Load manual overrides from YAML file."""
@@ -238,7 +313,9 @@ def process_poster_pdfs(
     output_json: Path,
     output_images_dir: Path,
     start_id: int = 1,
-    overrides: Optional[Dict] = None
+    overrides: Optional[Dict] = None,
+    use_vision: bool = False,
+    vision_model: str = "llama3.2-vision:latest"
 ) -> List[Dict]:
     """Process all PDFs in a directory."""
 
@@ -251,6 +328,8 @@ def process_poster_pdfs(
     print(f"Found {len(pdf_files)} PDF files")
     if overrides:
         print(f"Using {len(overrides)} manual overrides")
+    if use_vision:
+        print(f"Using vision model: {vision_model}")
     print("=" * 60)
 
     posters = []
@@ -260,13 +339,31 @@ def process_poster_pdfs(
         pdf_basename = pdf_path.stem  # filename without .pdf
         print(f"\nProcessing {pdf_path.name} → {poster_id}")
 
-        # Extract text
-        text = extract_text_from_pdf(pdf_path)
-        if not text:
-            print(f"  Warning: No text extracted, using defaults")
+        # Convert to PNG first (needed for both modes)
+        png_path = output_images_dir / f"{poster_id}.png"
+        success = pdf_to_png(pdf_path, png_path)
 
-        # Parse content
-        content = parse_poster_content(text, poster_id, pdf_basename)
+        if not success:
+            print(f"  Warning: PNG conversion failed")
+
+        # Extract metadata - use vision if enabled, otherwise text parsing
+        if use_vision and success:
+            print(f"  Using vision model to extract metadata...")
+            vision_metadata = extract_metadata_with_vision(png_path, vision_model)
+            if vision_metadata:
+                content = vision_metadata
+                print(f"  ✓ Vision extraction successful")
+                print(f"  Title: {content.get('title', 'N/A')[:60]}")
+            else:
+                print(f"  ⚠ Vision extraction failed, falling back to text parsing")
+                text = extract_text_from_pdf(pdf_path)
+                content = parse_poster_content(text, poster_id, pdf_basename)
+        else:
+            # Traditional text extraction
+            text = extract_text_from_pdf(pdf_path)
+            if not text:
+                print(f"  Warning: No text extracted, using defaults")
+            content = parse_poster_content(text, poster_id, pdf_basename)
 
         # Apply manual overrides if available
         if overrides and pdf_basename in overrides:
@@ -286,13 +383,6 @@ def process_poster_pdfs(
                     content['tags'] = override['tags']
                 if 'abstract' in override:
                     content['abstract'] = override['abstract']
-
-        # Convert to PNG
-        png_path = output_images_dir / f"{poster_id}.png"
-        success = pdf_to_png(pdf_path, png_path)
-
-        if not success:
-            print(f"  Warning: PNG conversion failed")
 
         # Create poster metadata
         poster = {
@@ -358,8 +448,39 @@ def main():
         action='store_true',
         help='Merge with existing posters.json instead of replacing'
     )
+    parser.add_argument(
+        '--use-vision',
+        action='store_true',
+        help='Use Ollama vision model for extraction (more accurate titles/metadata)'
+    )
+    parser.add_argument(
+        '--vision-model',
+        type=str,
+        default='llama3.2-vision:latest',
+        help='Vision model to use with Ollama (default: llama3.2-vision:latest). Note: Gemma 3 does not have vision capabilities. Use llama3.2-vision, llava, or minicpm-v for vision tasks.'
+    )
 
     args = parser.parse_args()
+
+    # Validate vision settings
+    if args.use_vision:
+        if not VISION_AVAILABLE:
+            print("Error: --use-vision requires 'requests' package")
+            print("Install with: pip install requests")
+            return
+
+        if not check_ollama_available():
+            print("Error: --use-vision requires Ollama to be running")
+            print("\nPlease start Ollama:")
+            print("  1. Install from https://ollama.ai")
+            print("  2. Run: ollama serve")
+            print("  3. Pull a vision model:")
+            print("     ollama pull llama3.2-vision    (recommended)")
+            print("     ollama pull llava")
+            print("\nNote: Gemma 3 does NOT support vision. Use llama3.2-vision instead.")
+            return
+
+        print(f"✓ Vision mode enabled with model: {args.vision_model}")
 
     # Setup paths
     script_dir = Path(__file__).parent
@@ -380,7 +501,15 @@ def main():
     overrides = load_overrides(overrides_file)
 
     # Process PDFs
-    new_posters = process_poster_pdfs(pdf_dir, output_json, output_images_dir, args.start_id, overrides)
+    new_posters = process_poster_pdfs(
+        pdf_dir,
+        output_json,
+        output_images_dir,
+        args.start_id,
+        overrides,
+        use_vision=args.use_vision,
+        vision_model=args.vision_model
+    )
 
     if not new_posters:
         print("No posters to save")
