@@ -26,6 +26,7 @@ echo '
 [dependencies]
 python = ">=3.11,<3.13"
 pillow = ">=10.0.0"
+pyyaml = ">=6.0"
 
 [pypi-dependencies]
 # PDF processing (not all available on conda-forge)

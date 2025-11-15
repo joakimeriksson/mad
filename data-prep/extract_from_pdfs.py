@@ -24,13 +24,30 @@ try:
     from pdf2image import convert_from_path
     from PIL import Image
     import PyPDF2
+    import yaml
 except ImportError:
     print("Error: Missing required packages")
-    print("Install with: pip install pdf2image pypdf pillow")
+    print("Install with: pixi add pyyaml")
+    print("Or: pip install pdf2image pypdf pillow pyyaml")
     print("\nAlso install poppler:")
     print("  macOS: brew install poppler")
     print("  Linux: sudo apt-get install poppler-utils")
     exit(1)
+
+
+def load_overrides(overrides_file: Path) -> Dict:
+    """Load manual overrides from YAML file."""
+    if not overrides_file.exists():
+        return {}
+
+    try:
+        with open(overrides_file, 'r') as f:
+            overrides = yaml.safe_load(f) or {}
+        print(f"Loaded {len(overrides)} overrides from {overrides_file}")
+        return overrides
+    except Exception as e:
+        print(f"Warning: Could not load overrides: {e}")
+        return {}
 
 
 def extract_text_from_pdf(pdf_path: Path) -> str:
@@ -47,15 +64,63 @@ def extract_text_from_pdf(pdf_path: Path) -> str:
         return ""
 
 
-def parse_poster_content(text: str, poster_id: str) -> Dict:
+def extract_title_smartly(lines: List[str], poster_id: str) -> str:
+    """
+    Smarter title extraction with multiple strategies.
+    """
+    if not lines:
+        return f"Research Poster {poster_id}"
+
+    # Strategy 1: Skip common headers/footers
+    skip_patterns = [
+        r'rise.*research.*institute',
+        r'university',
+        r'department',
+        r'page \d+',
+        r'^\d+$',  # Just numbers
+    ]
+
+    for i, line in enumerate(lines[:10]):  # Check first 10 lines
+        # Skip if matches skip patterns
+        if any(re.search(pattern, line, re.IGNORECASE) for pattern in skip_patterns):
+            continue
+
+        # Skip very short lines (likely not titles)
+        if len(line) < 10:
+            continue
+
+        # Skip lines that look like URLs or emails
+        if '@' in line or 'http' in line.lower():
+            continue
+
+        # Good title candidate:
+        # - Not too short, not too long (10-150 chars)
+        # - Has capital letters
+        # - Doesn't match skip patterns
+        if 10 <= len(line) <= 150 and any(c.isupper() for c in line):
+            return line
+
+    # Fallback: use first non-trivial line
+    for line in lines[:5]:
+        if len(line) > 10:
+            # Truncate if too long
+            if len(line) > 150:
+                return line[:150] + "..."
+            return line
+
+    return f"Research Poster {poster_id}"
+
+
+def parse_poster_content(text: str, poster_id: str, pdf_filename: str = "") -> Dict:
     """
     Parse extracted text to find title, authors, abstract, etc.
     This is a basic heuristic parser - you may need to customize for your PDFs.
     """
     lines = [line.strip() for line in text.split('\n') if line.strip()]
 
-    # Try to identify components (this is heuristic and may need adjustment)
-    title = lines[0] if lines else f"Research Poster {poster_id}"
+    # Use smarter title extraction
+    title = extract_title_smartly(lines, poster_id)
+    print(f"  Extracted title: {title[:60]}..." if len(title) > 60 else f"  Extracted title: {title}")
 
     # Look for common patterns
     authors = []
@@ -172,7 +237,8 @@ def process_poster_pdfs(
     pdf_dir: Path,
     output_json: Path,
     output_images_dir: Path,
-    start_id: int = 1
+    start_id: int = 1,
+    overrides: Optional[Dict] = None
 ) -> List[Dict]:
     """Process all PDFs in a directory."""
 
@@ -183,12 +249,15 @@ def process_poster_pdfs(
         return []
 
     print(f"Found {len(pdf_files)} PDF files")
+    if overrides:
+        print(f"Using {len(overrides)} manual overrides")
     print("=" * 60)
 
     posters = []
 
     for idx, pdf_path in enumerate(pdf_files, start=start_id):
         poster_id = f"poster_{idx:03d}"
+        pdf_basename = pdf_path.stem  # filename without .pdf
         print(f"\nProcessing {pdf_path.name} → {poster_id}")
 
         # Extract text
@@ -197,7 +266,26 @@ def process_poster_pdfs(
             print(f"  Warning: No text extracted, using defaults")
 
         # Parse content
-        content = parse_poster_content(text, poster_id)
+        content = parse_poster_content(text, poster_id, pdf_basename)
+
+        # Apply manual overrides if available
+        if overrides and pdf_basename in overrides:
+            override = overrides[pdf_basename]
+            if isinstance(override, str):
+                # Simple case: just a title override
+                content['title'] = override
+                print(f"  ✓ Applied title override: {override}")
+            elif isinstance(override, dict):
+                # Full override with multiple fields
+                if 'title' in override:
+                    content['title'] = override['title']
+                    print(f"  ✓ Applied title override: {override['title']}")
+                if 'authors' in override:
+                    content['authors'] = override['authors']
+                if 'tags' in override:
+                    content['tags'] = override['tags']
+                if 'abstract' in override:
+                    content['abstract'] = override['abstract']
 
         # Convert to PNG
         png_path = output_images_dir / f"{poster_id}.png"
@@ -287,8 +375,12 @@ def main():
     output_json.parent.mkdir(parents=True, exist_ok=True)
     output_images_dir.mkdir(parents=True, exist_ok=True)
 
+    # Load manual overrides if file exists
+    overrides_file = script_dir / "poster_overrides.yaml"
+    overrides = load_overrides(overrides_file)
+
     # Process PDFs
-    new_posters = process_poster_pdfs(pdf_dir, output_json, output_images_dir, args.start_id)
+    new_posters = process_poster_pdfs(pdf_dir, output_json, output_images_dir, args.start_id, overrides)
 
     if not new_posters:
         print("No posters to save")

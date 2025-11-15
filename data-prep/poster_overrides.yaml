@@ -1,0 +1,31 @@
+# Poster Metadata Overrides
+# ===========================
+# Use this file to manually override auto-extracted metadata from PDFs
+#
+# Format:
+#   PDF filename (without .pdf extension) : override data
+#
+# Simple title-only override:
+#   my-poster: "The Actual Title"
+#
+# Full metadata override:
+#   my-poster:
+#     title: "The Actual Title"
+#     authors: ["First Author", "Second Author"]
+#     tags: ["topic1", "topic2"]
+#     abstract: "Custom abstract text..."
+#
+# ===========================
+
+# Example: Simple title override
+contiki-ng-nicolas-tsiftes: "Contiki-NG: The OS for Next Generation IoT Devices"
+
+# Example: Full metadata override
+# my-research-poster:
+#   title: "My Actual Research Title Here"
+#   authors: ["Dr. Jane Smith", "Prof. John Doe"]
+#   tags: ["ai", "machine-learning", "robotics"]
+#   abstract: "This research explores..."
+
+# Add your overrides below:
+# ===========================
