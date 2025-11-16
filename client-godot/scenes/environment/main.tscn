@@ -1,15 +1,25 @@
-[gd_scene load_steps=10 format=3 uid="uid://main_scene_001"]
+[gd_scene load_steps=33 format=3 uid="uid://bjmkb48bbua7e"]
 
-[ext_resource type="PackedScene" uid="uid://player_001" path="res://scenes/player/player.tscn" id="1"]
-[ext_resource type="PackedScene" uid="uid://dialogue_ui_001" path="res://scenes/ui/dialogue_ui.tscn" id="2"]
-[ext_resource type="Script" path="res://scripts/agent_service.gd" id="3"]
-[ext_resource type="Script" path="res://scripts/game_controller.gd" id="4"]
-[ext_resource type="PackedScene" uid="uid://poster_booth_001" path="res://scenes/interactables/poster_booth.tscn" id="5"]
-[ext_resource type="PackedScene" uid="uid://guide_kiosk_001" path="res://scenes/interactables/guide_kiosk.tscn" id="6"]
-[ext_resource type="PackedScene" uid="uid://npc_character_simple" path="res://scenes/interactables/npc_character.tscn" id="7"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1"]
+[ext_resource type="PackedScene" path="res://scenes/ui/dialogue_ui.tscn" id="2"]
+[ext_resource type="Script" uid="uid://dr8au26qqbn48" path="res://scripts/agent_service.gd" id="3"]
+[ext_resource type="Script" uid="uid://dpj4uaq5l7ucn" path="res://scripts/game_controller.gd" id="4"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/poster_booth.tscn" id="5"]
+[ext_resource type="Texture2D" uid="uid://m5s3kcsteqpd" path="res://assets/posters/poster_001.png" id="5_twohr"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/guide_kiosk.tscn" id="6"]
+[ext_resource type="Texture2D" uid="uid://bymhkc3o5xpl4" path="res://assets/posters/poster_002.png" id="6_bq23o"]
+[ext_resource type="PackedScene" path="res://scenes/interactables/npc_character.tscn" id="7"]
+[ext_resource type="Texture2D" uid="uid://cmsaajd4kejqc" path="res://assets/posters/poster_003.png" id="7_lgg8e"]
+[ext_resource type="Texture2D" uid="uid://1vvr6u63qbld" path="res://assets/posters/poster_004.png" id="8_3qiuq"]
+[ext_resource type="Texture2D" uid="uid://imabvoxphi3" path="res://assets/posters/poster_005.png" id="9_rgh7b"]
+[ext_resource type="Texture2D" uid="uid://0qtnmkhjrddx" path="res://assets/posters/poster_006.png" id="11_gtfy3"]
+[ext_resource type="Texture2D" uid="uid://bgl23ry0dai73" path="res://assets/posters/poster_007.png" id="12_0tjjs"]
+[ext_resource type="Texture2D" uid="uid://lx1atiq8v85v" path="res://assets/posters/poster_008.png" id="13_j3xl1"]
+[ext_resource type="Texture2D" uid="uid://bpgu1nakvc5wt" path="res://assets/posters/poster_009.png" id="14_w6wpc"]
+[ext_resource type="Texture2D" uid="uid://y3jii3dbke0g" path="res://assets/posters/poster_010.png" id="15_b0ood"]
+[ext_resource type="Texture2D" uid="uid://eys2brup7t4s" path="res://assets/posters/poster_011.png" id="16_d4w1o"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
-sky_top_color = Color(0.385, 0.454, 0.55, 1)
 sky_horizon_color = Color(0.646, 0.656, 0.67, 1)
 ground_bottom_color = Color(0.102, 0.145, 0.188, 1)
 ground_horizon_color = Color(0.646, 0.656, 0.67, 1)
@@ -22,6 +32,61 @@ background_mode = 2
 sky = SubResource("Sky_1")
 ambient_light_source = 3
 ambient_light_color = Color(1, 1, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_504f1"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("5_twohr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6d574"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("6_bq23o")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8f2qt"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("7_lgg8e")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rq4m7"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("8_3qiuq")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7bj22"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("9_rgh7b")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ip7on"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("11_gtfy3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36wea"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("12_0tjjs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8mr3r"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("13_j3xl1")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xh6vr"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("14_w6wpc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7w6i"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("15_b0ood")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iyy37"]
+cull_mode = 2
+shading_mode = 0
+albedo_texture = ExtResource("16_d4w1o")
 
 [node name="Main" type="Node3D"]
 
@@ -44,7 +109,7 @@ shadow_enabled = true
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="Floor" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.03991413, -0.5000001, -0.30202794)
 use_collision = true
 size = Vector3(30, 1, 40)
 
@@ -93,6 +158,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0,
 agent_name = "HPC Researcher"
 poster_id = "poster_001"
 
+[node name="PosterMesh" parent="Interactables/PosterBooth1" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_504f1")
+
 [node name="Label3D" parent="Interactables/PosterBooth1" index="4"]
 text = "Data-Driven HPC: Harnessing AI for Simulation"
 
@@ -101,13 +169,19 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0,
 agent_name = "Research Scientist"
 poster_id = "poster_002"
 
+[node name="PosterMesh" parent="Interactables/PosterBooth2" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_6d574")
+
 [node name="Label3D" parent="Interactables/PosterBooth2" index="4"]
-text = "The main title of the poster"
+text = "ED5GE Poster"
 
 [node name="PosterBooth3" parent="Interactables" instance=ExtResource("5")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 0)
 agent_name = "Graph Neural Network Researcher"
 poster_id = "poster_003"
+
+[node name="PosterMesh" parent="Interactables/PosterBooth3" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8f2qt")
 
 [node name="Label3D" parent="Interactables/PosterBooth3" index="4"]
 text = "Graph Neural Networks for Traffic Prediction"
@@ -117,13 +191,19 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0,
 agent_name = "Research Scientist"
 poster_id = "poster_004"
 
+[node name="PosterMesh" parent="Interactables/PosterBooth4" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_rq4m7")
+
 [node name="Label3D" parent="Interactables/PosterBooth4" index="4"]
-text = "The main title of the poster"
+text = "Higher"
 
 [node name="PosterBooth5" parent="Interactables" instance=ExtResource("5")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, -10)
 agent_name = "Language Model Researcher"
 poster_id = "poster_005"
+
+[node name="PosterMesh" parent="Interactables/PosterBooth5" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_7bj22")
 
 [node name="Label3D" parent="Interactables/PosterBooth5" index="4"]
 text = "The Impact of Large Language Models on Robotics"
@@ -136,6 +216,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0,
 agent_name = "Research Scientist"
 poster_id = "poster_006"
 
+[node name="PosterMesh" parent="Interactables/PosterBooth6" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ip7on")
+
 [node name="Label3D" parent="Interactables/PosterBooth6" index="4"]
 text = "The main title of the poster"
 
@@ -143,6 +226,9 @@ text = "The main title of the poster"
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 5)
 agent_name = "Research Scientist"
 poster_id = "poster_007"
+
+[node name="PosterMesh" parent="Interactables/PosterBooth7" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_36wea")
 
 [node name="Label3D" parent="Interactables/PosterBooth7" index="4"]
 text = "The main title of the poster"
@@ -152,6 +238,9 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0,
 agent_name = "Research Scientist"
 poster_id = "poster_008"
 
+[node name="PosterMesh" parent="Interactables/PosterBooth8" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_8mr3r")
+
 [node name="Label3D" parent="Interactables/PosterBooth8" index="4"]
 text = "The Main Title of the Poster"
 
@@ -159,6 +248,9 @@ text = "The Main Title of the Poster"
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, -15)
 agent_name = "Graph Neural Network Researcher"
 poster_id = "poster_009"
+
+[node name="PosterMesh" parent="Interactables/PosterBooth9" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_xh6vr")
 
 [node name="Label3D" parent="Interactables/PosterBooth9" index="4"]
 text = "Graph Neural Network based anomaly detection"
@@ -168,6 +260,9 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 3, 0, 
 agent_name = "Research Scientist"
 poster_id = "poster_010"
 
+[node name="PosterMesh" parent="Interactables/PosterBooth10" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_s7w6i")
+
 [node name="Label3D" parent="Interactables/PosterBooth10" index="4"]
 text = "The main title of the poster"
 
@@ -175,6 +270,9 @@ text = "The main title of the poster"
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, 15)
 agent_name = "IoT Systems Researcher"
 poster_id = "poster_011"
+
+[node name="PosterMesh" parent="Interactables/PosterBooth11" index="2"]
+surface_material_override/0 = SubResource("StandardMaterial3D_iyy37")
 
 [node name="Label3D" parent="Interactables/PosterBooth11" index="4"]
 text = "Contiki-NG: The OS for Next Generation IoT Devices"

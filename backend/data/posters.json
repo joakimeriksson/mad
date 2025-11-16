@@ -27,7 +27,7 @@
   },
   {
     "id": "poster_002",
-    "title": "The main title of the poster",
+    "title": "ED5GE Poster",
     "authors": [
       "R\u00e5dman",
       "J\u00e4rven",
@@ -58,7 +58,7 @@
     "title": "Graph Neural Networks for Traffic Prediction",
     "authors": [
       "Daniel Zellers",
-      "S\u00f6ren Eriksson",
+      "H Eriksson",
       "Pengfei Li"
     ],
     "tags": [
@@ -82,7 +82,7 @@
   },
   {
     "id": "poster_004",
-    "title": "The main title of the poster",
+    "title": "Higher",
     "authors": [
       "Author 1",
       "Author 2"
