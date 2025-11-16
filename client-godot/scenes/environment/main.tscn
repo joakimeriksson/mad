@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/game_controller.gd" id="4"]
 [ext_resource type="PackedScene" uid="uid://poster_booth_001" path="res://scenes/interactables/poster_booth.tscn" id="5"]
 [ext_resource type="PackedScene" uid="uid://guide_kiosk_001" path="res://scenes/interactables/guide_kiosk.tscn" id="6"]
+[ext_resource type="PackedScene" uid="uid://npc_character_simple" path="res://scenes/interactables/npc_character.tscn" id="7"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_1"]
 sky_top_color = Color(0.385, 0.454, 0.55, 1)
@@ -126,6 +127,9 @@ poster_id = "poster_005"
 
 [node name="Label3D" parent="Interactables/PosterBooth5" index="4"]
 text = "Sustainable Data Centers"
+
+[node name="NPC" parent="Interactables/PosterBooth5" instance=ExtResource("7")]
+transform = Transform3D(0.707107, 0, -0.707107, 0, 1, 0, 0.707107, 0, 0.707107, 0.5, 0, 1.2)
 
 [node name="PosterBooth6" parent="Interactables" instance=ExtResource("5")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 0, -10)
