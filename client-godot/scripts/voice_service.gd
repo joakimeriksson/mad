@@ -19,7 +19,7 @@ signal tts_finished
 @export var whisper_model: String = "whisper"  # Or use OpenAI API
 
 var current_utterance_id: int = 0
-var audio_recorder: AudioStreamRecord
+# var audio_recorder  # TODO: Implement with AudioStreamMicrophone for STT
 var recording: bool = false
 var http_request: HTTPRequest
 
