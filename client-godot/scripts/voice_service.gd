@@ -78,7 +78,7 @@ func speak(text: String) -> void:
 	)
 
 	tts_started.emit()
-	print("Speaking: ", text[:50], "...")
+	print("Speaking: ", text.substr(0, 50), "...")
 
 
 func stop_speaking() -> void:
