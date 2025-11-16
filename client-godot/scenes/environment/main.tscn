@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="1"]
 [ext_resource type="PackedScene" path="res://scenes/ui/dialogue_ui.tscn" id="2"]
 [ext_resource type="Script" uid="uid://dr8au26qqbn48" path="res://scripts/agent_service.gd" id="3"]
+[ext_resource type="Script" path="res://scripts/voice_service.gd" id="3_voice"]
 [ext_resource type="Script" uid="uid://dpj4uaq5l7ucn" path="res://scripts/game_controller.gd" id="4"]
 [ext_resource type="PackedScene" path="res://scenes/interactables/poster_booth.tscn" id="5"]
 [ext_resource type="Texture2D" uid="uid://m5s3kcsteqpd" path="res://assets/posters/poster_001.png" id="5_twohr"]
@@ -98,6 +99,9 @@ agent_service_path = NodePath("../AgentService")
 
 [node name="AgentService" type="Node" parent="."]
 script = ExtResource("3")
+
+[node name="VoiceService" type="Node" parent="."]
+script = ExtResource("3_voice")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1")
@@ -282,6 +286,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 15)
 
 [node name="DialogueUI" parent="." instance=ExtResource("2")]
 agent_service_path = NodePath("../AgentService")
+voice_service_path = NodePath("../VoiceService")
 
 [editable path="Interactables/PosterBooth1"]
 [editable path="Interactables/PosterBooth2"]
