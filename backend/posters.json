@@ -1,185 +1,286 @@
-{
-  "schema_version": "1.0",
-  "last_updated": "2025-11-15T12:31:43.113580",
-  "posters": [
-    {
-      "id": "poster_001",
-      "title": "Edge AI for Robotics",
-      "authors": [
-        "Alice Johnson",
-        "Bob Smith"
-      ],
-      "tags": [
-        "edge-ai",
-        "robotics",
-        "machine-learning"
-      ],
-      "abstract": "This poster presents a novel approach to deploying AI models on edge devices for robotic applications. We demonstrate real-time object detection and path planning on resource-constrained hardware.",
-      "poster_image": "res://assets/posters/edge_ai_robotics.png",
-      "keywords": [
-        "computer-vision",
-        "embedded-systems",
-        "tensorflow-lite"
-      ],
-      "contact_email": "alice.johnson@rise.se",
-      "room": "corridor_1",
-      "booth_id": "booth_001",
-      "faq": [
-        {
-          "question": "What hardware platforms did you test on?",
-          "answer": "We tested on Raspberry Pi 4, NVIDIA Jetson Nano, and Google Coral Dev Board."
-        },
-        {
-          "question": "What are the typical inference times?",
-          "answer": "Object detection runs at 30 FPS on Jetson Nano and 15 FPS on Raspberry Pi 4."
-        },
-        {
-          "question": "Is the code open source?",
-          "answer": "Yes, our implementation is available on GitHub under MIT license."
-        }
-      ],
-      "related_links": [
-        {
-          "title": "GitHub Repository",
-          "url": "https://github.com/rise/edge-ai-robotics"
-        },
-        {
-          "title": "Research Paper",
-          "url": "https://arxiv.org/example/edge-ai-robotics"
-        }
-      ],
-      "metadata": {
-        "created_at": "2025-11-15T09:00:00.000000",
-        "updated_at": "2025-11-15T12:31:43.113381",
-        "source": "csv_import",
-        "version": "1.0"
+[
+  {
+    "id": "poster_001",
+    "title": "Data-Driven HPC: Harnessing AI for Simulation",
+    "authors": [
+      "DURE",
+      "AI"
+    ],
+    "tags": [
+      "Data-Driven HPC",
+      "AI-Accelerated Simulation",
+      "Workflow Optimization",
+      "Data-Driven HPC",
+      "AI-Accelerated Simulation"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_1",
+    "abstract": "This poster presents a data-driven approach to high-performance computing (HPC) by leveraging AI for simulation. The focus is on optimizing workflow and accelerating simulations through AI-powered solutions. This research aims to improve HPC efficiency and unlock new possibilities for scientific discovery.",
+    "poster_image": "res://assets/posters/poster_001.png",
+    "source_pdf": "DARE-Poster.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
       }
-    },
-    {
-      "id": "poster_002",
-      "title": "Secure Multi-Party Computation",
-      "authors": [
-        "Carol White",
-        "David Brown"
-      ],
-      "tags": [
-        "security",
-        "cryptography",
-        "privacy"
-      ],
-      "abstract": "We introduce a new protocol for secure multi-party computation that enables collaborative data analysis while preserving privacy. Our method achieves 40% better performance than existing approaches.",
-      "poster_image": "res://assets/posters/secure_mpc.png",
-      "keywords": [
-        "privacy-preserving",
-        "distributed-systems",
-        "cryptography"
-      ],
-      "contact_email": "carol.white@rise.se",
-      "room": "room_1",
-      "booth_id": "booth_002",
-      "faq": [
-        {
-          "question": "What cryptographic primitives do you use?",
-          "answer": "Our protocol is based on garbled circuits and oblivious transfer with optimizations for specific use cases."
-        },
-        {
-          "question": "How many parties can participate?",
-          "answer": "Our current implementation supports 2-10 parties, with plans to scale to larger groups."
-        }
-      ],
-      "metadata": {
-        "created_at": "2025-11-15T09:00:00.000000",
-        "updated_at": "2025-11-15T12:31:43.113445",
-        "source": "csv_import",
-        "version": "1.0"
+    ]
+  },
+  {
+    "id": "poster_002",
+    "title": "The main title of the poster",
+    "authors": [
+      "R\u00e5dman",
+      "J\u00e4rven",
+      "Aalto",
+      "Bj\u00f6rn"
+    ],
+    "tags": [
+      "edge computing",
+      "AI",
+      "data analytics",
+      "cloud computing",
+      "IoT"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_2",
+    "abstract": "This poster investigates the potential of edge computing for AI and data analytics. It explores how the deployment of AI models closer to the data source can improve performance and reduce latency.  The research focuses on leveraging AI solutions to extract value from data residing in distributed environments.",
+    "poster_image": "res://assets/posters/poster_002.png",
+    "source_pdf": "ED5GE Dev Com A0.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
       }
-    },
-    {
-      "id": "poster_003",
-      "title": "5G Network Slicing for IoT",
-      "authors": [
-        "Eve Davis",
-        "Frank Miller"
-      ],
-      "tags": [
-        "5g",
-        "iot",
-        "networking"
-      ],
-      "abstract": "This work explores network slicing techniques in 5G networks optimized for IoT deployments. We present a dynamic resource allocation algorithm that improves latency by 60%.",
-      "poster_image": "res://assets/posters/5g_iot_slicing.png",
-      "keywords": [
-        "network-optimization",
-        "edge-computing",
-        "iot"
-      ],
-      "contact_email": "eve.davis@rise.se",
-      "room": "corridor_1",
-      "booth_id": "booth_003",
-      "faq": [
-        {
-          "question": "What IoT use cases did you test?",
-          "answer": "We tested with smart city sensors, industrial IoT, and connected vehicle scenarios."
-        }
-      ],
-      "metadata": {
-        "created_at": "2025-11-15T09:00:00.000000",
-        "updated_at": "2025-11-15T12:31:43.113493",
-        "source": "csv_import",
-        "version": "1.0"
+    ]
+  },
+  {
+    "id": "poster_003",
+    "title": "Graph Neural Networks for Traffic Prediction",
+    "authors": [
+      "Daniel Zellers",
+      "S\u00f6ren Eriksson",
+      "Pengfei Li"
+    ],
+    "tags": [
+      "Traffic Prediction",
+      "Graph Neural Networks",
+      "Deep Learning",
+      "Routing",
+      "Urban Planning"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_3",
+    "abstract": "This poster presents a novel approach to traffic prediction using Graph Neural Networks. The methodology leverages the structural information of road networks to accurately forecast traffic flow. The results demonstrate improved prediction accuracy compared to traditional methods.",
+    "poster_image": "res://assets/posters/poster_003.png",
+    "source_pdf": "GNNs+LLMs_poster.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
       }
-    },
-    {
-      "id": "poster_004",
-      "title": "Explainable AI in Healthcare",
-      "authors": [
-        "Grace Lee",
-        "Henry Wilson"
-      ],
-      "tags": [
-        "ai",
-        "healthcare",
-        "explainability"
-      ],
-      "abstract": "We developed an explainable AI framework for medical diagnosis that provides interpretable insights to clinicians. Our system has been validated on real patient data with 95% accuracy.",
-      "poster_image": "res://assets/posters/xai_healthcare.png",
-      "metadata": {
-        "source": "csv_import",
-        "created_at": "2025-11-15T12:31:43.113526",
-        "updated_at": "2025-11-15T12:31:43.113526"
-      },
-      "keywords": [
-        "medical-ai",
-        "interpretability",
-        "neural-networks"
-      ],
-      "contact_email": "grace.lee@rise.se"
-    },
-    {
-      "id": "poster_005",
-      "title": "Autonomous Drone Navigation",
-      "authors": [
-        "Ivan Chen",
-        "Julia Martinez"
-      ],
-      "tags": [
-        "robotics",
-        "drones",
-        "autonomous-systems"
-      ],
-      "abstract": "This poster showcases our autonomous navigation system for drones in GPS-denied environments. Using visual-inertial odometry and SLAM, drones can navigate complex indoor spaces.",
-      "poster_image": "res://assets/posters/autonomous_drones.png",
-      "metadata": {
-        "source": "csv_import",
-        "created_at": "2025-11-15T12:31:43.113557",
-        "updated_at": "2025-11-15T12:31:43.113557"
-      },
-      "keywords": [
-        "slam",
-        "computer-vision",
-        "path-planning"
-      ],
-      "contact_email": "ivan.chen@rise.se"
-    }
-  ]
-}
+    ]
+  },
+  {
+    "id": "poster_004",
+    "title": "The main title of the poster",
+    "authors": [
+      "Author 1",
+      "Author 2"
+    ],
+    "tags": [
+      "Hardware",
+      "Software",
+      "Research",
+      "Development",
+      "Optimization"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_4",
+    "abstract": "This poster presents research into hardware-software co-design for data center management. The focus is on utilizing remote management capabilities to improve efficiency and reduce operational costs. The research demonstrates a novel approach for optimizing data center performance through integrated hardware and software solutions.",
+    "poster_image": "res://assets/posters/poster_004.png",
+    "source_pdf": "Higher-POSTER-A0.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_005",
+    "title": "The Impact of Large Language Models on Robotics",
+    "authors": [
+      "Anders Holst",
+      "Niclas F\u00f6rst"
+    ],
+    "tags": [
+      "Large Language Models",
+      "Robotics",
+      "AI",
+      "Control Systems",
+      "Human-Robot Interaction"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_5",
+    "abstract": "This research explores the potential of large language models for controlling robots. It investigates how these models can be used to interpret human commands and translate them into robotic actions. The study aims to develop intuitive and effective interfaces for human-robot collaboration, paving the way for more seamless and responsive robotic systems.",
+    "poster_image": "res://assets/posters/poster_005.png",
+    "source_pdf": "RISE_Open_House_2025_LLM_Robot-Demo.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_006",
+    "title": "The main title of the poster",
+    "authors": [
+      "Eriksson",
+      "Schroder"
+    ],
+    "tags": [
+      "Large Language Models",
+      "AI",
+      "Chatbots",
+      "Prompt Engineering",
+      "Large Language Models"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_6",
+    "abstract": "This poster presents a system for intelligent prompt engineering, enabling more effective interactions with Large Language Models. The system focuses on crafting optimized prompts, which are crucial for eliciting desired responses from LLMs, to enhance model performance and user experience.  It demonstrates the effectiveness of this approach in various applications including chatbots and virtual assistants.",
+    "poster_image": "res://assets/posters/poster_006.png",
+    "source_pdf": "RISE_Open_House_2025_MCP-LLM-IoT-Demo-v2.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_007",
+    "title": "The main title of the poster",
+    "authors": [
+      "Joel Eriksson",
+      "Anja Seglat"
+    ],
+    "tags": [
+      "deep learning",
+      "edge computing",
+      "cybersecurity",
+      "energy",
+      "smart integration"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_7",
+    "abstract": "This research explores a novel framework for real-time data processing and analytics at the edge.  It integrates deep learning models with edge computing platforms, enabling real-time insights while reducing latency. The proposed solution prioritizes cybersecurity and energy efficiency, creating a robust and intelligent system for smart integration.",
+    "poster_image": "res://assets/posters/poster_007.png",
+    "source_pdf": "RISE_Poster_COP-Pilot.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_008",
+    "title": "The Main Title of the Poster",
+    "authors": [
+      "Author 1",
+      "Author 2"
+    ],
+    "tags": [
+      "topic1",
+      "topic2",
+      "topic3"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_8",
+    "abstract": "This poster presents a novel approach to translation with a focus on improving performance. The key contribution is a new model architecture designed to enhance the quality of translations.  The results demonstrate significant gains in translation accuracy compared to existing methods.",
+    "poster_image": "res://assets/posters/poster_008.png",
+    "source_pdf": "SWESAT-1.0 OpenHouse.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_009",
+    "title": "Graph Neural Network based anomaly detection",
+    "authors": [
+      "Author 1",
+      "Author 2"
+    ],
+    "tags": [
+      "Graph Neural Networks",
+      "Anomaly Detection",
+      "Deep Learning"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_9",
+    "abstract": "This poster introduces a novel approach for anomaly detection using Graph Neural Networks. The proposed method learns representations of complex data structures and identifies deviations from normal behavior.  It aims to provide more robust and accurate anomaly detection compared to traditional techniques.",
+    "poster_image": "res://assets/posters/poster_009.png",
+    "source_pdf": "Scazzariello-Poster-SEMLA.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_010",
+    "title": "The main title of the poster",
+    "authors": [
+      "Rahman",
+      "Voigt",
+      "Ko"
+    ],
+    "tags": [
+      "adaptive learning",
+      "deep learning",
+      "neural networks"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_10",
+    "abstract": "This poster investigates adaptive learning methods utilizing deep learning and neural networks for improved model training. The research explores novel architectures and training strategies to enhance model performance.  Ultimately, the goal is to develop more robust and efficient learning systems.",
+    "poster_image": "res://assets/posters/poster_010.png",
+    "source_pdf": "Shuai-Poster-2025.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_011",
+    "title": "Contiki-NG: The OS for Next Generation IoT Devices",
+    "authors": [
+      "Peter",
+      "Joakim"
+    ],
+    "tags": [
+      "low power communication",
+      "network protocols",
+      "energy efficient communication",
+      "wireless communication",
+      "data transmission"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_11",
+    "abstract": "This research focuses on developing network protocols for efficient communication in resource-constrained environments. The key contribution is the design of protocols that minimize energy consumption while maintaining reliable data transmission.  These protocols aim to improve network performance and reduce the operational costs associated with communication systems.",
+    "poster_image": "res://assets/posters/poster_011.png",
+    "source_pdf": "contiki-ng-nicolas-tsiftes.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  }
+]
