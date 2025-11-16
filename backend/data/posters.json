@@ -1,101 +1,285 @@
 [
   {
     "id": "poster_001",
-    "title": "Edge AI for Autonomous Robotics",
-    "authors": ["Dr. Anna Karlsson", "Prof. Erik Lindgren"],
-    "tags": ["edge-ai", "robotics", "machine-learning", "autonomous-systems"],
+    "title": "Data-Driven HPC: Harnessing AI for Simulation",
+    "authors": [
+      "DURE",
+      "AI"
+    ],
+    "tags": [
+      "Data-Driven HPC",
+      "AI-Accelerated Simulation",
+      "Workflow Optimization",
+      "Data-Driven HPC",
+      "AI-Accelerated Simulation"
+    ],
     "room": "corridor",
     "booth_id": "booth_1",
-    "abstract": "This research explores efficient deep learning models optimized for edge devices in autonomous robotic systems. We present a novel compression technique that reduces model size by 80% while maintaining 95% accuracy, enabling real-time object detection on resource-constrained hardware.",
+    "abstract": "This poster presents a data-driven approach to high-performance computing (HPC) by leveraging AI for simulation. The focus is on optimizing workflow and accelerating simulations through AI-powered solutions. This research aims to improve HPC efficiency and unlock new possibilities for scientific discovery.",
     "poster_image": "res://assets/posters/poster_001.png",
+    "source_pdf": "DARE-Poster.pdf",
     "faq": [
       {
-        "question": "What hardware did you test on?",
-        "answer": "We tested on Raspberry Pi 4, NVIDIA Jetson Nano, and custom FPGA implementations."
-      },
-      {
-        "question": "How does this compare to existing solutions?",
-        "answer": "Our approach achieves 3x faster inference times compared to standard MobileNet while using 40% less memory."
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
       }
     ]
   },
   {
     "id": "poster_002",
-    "title": "Federated Learning for Privacy-Preserving Healthcare",
-    "authors": ["Dr. Maria Chen", "Dr. Johan Svensson"],
-    "tags": ["federated-learning", "privacy", "healthcare", "machine-learning"],
-    "room": "room_1",
+    "title": "The main title of the poster",
+    "authors": [
+      "R\u00e5dman",
+      "J\u00e4rven",
+      "Aalto",
+      "Bj\u00f6rn"
+    ],
+    "tags": [
+      "edge computing",
+      "AI",
+      "data analytics",
+      "cloud computing",
+      "IoT"
+    ],
+    "room": "corridor",
     "booth_id": "booth_2",
-    "abstract": "We present a federated learning framework that enables collaborative model training across hospitals without sharing sensitive patient data. Our differential privacy guarantees ensure that individual patient information cannot be reconstructed while achieving diagnostic accuracy comparable to centralized training.",
+    "abstract": "This poster investigates the potential of edge computing for AI and data analytics. It explores how the deployment of AI models closer to the data source can improve performance and reduce latency.  The research focuses on leveraging AI solutions to extract value from data residing in distributed environments.",
     "poster_image": "res://assets/posters/poster_002.png",
+    "source_pdf": "ED5GE Dev Com A0.pdf",
     "faq": [
       {
-        "question": "What diseases did you focus on?",
-        "answer": "We focused on diabetic retinopathy detection and early-stage cancer classification from medical imaging."
-      },
-      {
-        "question": "How many hospitals participated?",
-        "answer": "Our pilot study included 12 hospitals across Sweden, with a total dataset of over 50,000 patient records."
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
       }
     ]
   },
   {
     "id": "poster_003",
-    "title": "Quantum-Resistant Cryptography for IoT",
-    "authors": ["Prof. Lars Bergström", "Dr. Sofia Andersson"],
-    "tags": ["cryptography", "iot", "security", "quantum-computing"],
-    "room": "room_1",
+    "title": "Graph Neural Networks for Traffic Prediction",
+    "authors": [
+      "Daniel Zellers",
+      "S\u00f6ren Eriksson",
+      "Pengfei Li"
+    ],
+    "tags": [
+      "Traffic Prediction",
+      "Graph Neural Networks",
+      "Deep Learning",
+      "Routing",
+      "Urban Planning"
+    ],
+    "room": "corridor",
     "booth_id": "booth_3",
-    "abstract": "As quantum computers threaten current encryption standards, we propose a lightweight post-quantum cryptographic protocol specifically designed for IoT devices. Our lattice-based approach provides security against quantum attacks while maintaining low computational overhead suitable for battery-powered sensors.",
+    "abstract": "This poster presents a novel approach to traffic prediction using Graph Neural Networks. The methodology leverages the structural information of road networks to accurately forecast traffic flow. The results demonstrate improved prediction accuracy compared to traditional methods.",
     "poster_image": "res://assets/posters/poster_003.png",
+    "source_pdf": "GNNs+LLMs_poster.pdf",
     "faq": [
       {
-        "question": "When will quantum computers break current encryption?",
-        "answer": "Estimates suggest 10-15 years, but we need to deploy quantum-resistant solutions now since encrypted data can be harvested today and decrypted later."
-      },
-      {
-        "question": "What's the performance impact?",
-        "answer": "Our protocol adds only 15ms latency on typical IoT devices, which is acceptable for most use cases."
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
       }
     ]
   },
   {
     "id": "poster_004",
-    "title": "Human-Robot Collaboration in Manufacturing",
-    "authors": ["Dr. Anders Nilsson", "Dr. Emma Johansson"],
-    "tags": ["robotics", "hri", "manufacturing", "safety"],
+    "title": "The main title of the poster",
+    "authors": [
+      "Author 1",
+      "Author 2"
+    ],
+    "tags": [
+      "Hardware",
+      "Software",
+      "Research",
+      "Development",
+      "Optimization"
+    ],
     "room": "corridor",
     "booth_id": "booth_4",
-    "abstract": "This work investigates safe and efficient collaboration between humans and industrial robots in shared workspaces. We developed a predictive motion planning algorithm that anticipates human movements and adjusts robot trajectories in real-time to prevent collisions while maximizing productivity.",
+    "abstract": "This poster presents research into hardware-software co-design for data center management. The focus is on utilizing remote management capabilities to improve efficiency and reduce operational costs. The research demonstrates a novel approach for optimizing data center performance through integrated hardware and software solutions.",
     "poster_image": "res://assets/posters/poster_004.png",
+    "source_pdf": "Higher-POSTER-A0.pdf",
     "faq": [
       {
-        "question": "How do you ensure safety?",
-        "answer": "We use a combination of computer vision, depth sensors, and predictive models to maintain safe distances. The system has multiple fallback layers including emergency stops."
-      },
-      {
-        "question": "What industries can benefit?",
-        "answer": "Automotive assembly, electronics manufacturing, and warehouse logistics are prime candidates for this technology."
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
       }
     ]
   },
   {
     "id": "poster_005",
-    "title": "Sustainable Data Centers: AI-Driven Cooling Optimization",
-    "authors": ["Dr. Karin Pettersson", "Prof. Michael Holm"],
-    "tags": ["sustainability", "data-centers", "ai", "energy-efficiency"],
-    "room": "room_2",
+    "title": "The Impact of Large Language Models on Robotics",
+    "authors": [
+      "Anders Holst",
+      "Niclas F\u00f6rst"
+    ],
+    "tags": [
+      "Large Language Models",
+      "Robotics",
+      "AI",
+      "Control Systems",
+      "Human-Robot Interaction"
+    ],
+    "room": "corridor",
     "booth_id": "booth_5",
-    "abstract": "Data centers consume enormous amounts of energy for cooling. Our reinforcement learning system optimizes HVAC operations in real-time, reducing cooling energy consumption by up to 35% while maintaining strict temperature and humidity requirements. The system learns from historical data and weather forecasts to preemptively adjust cooling strategies.",
+    "abstract": "This research explores the potential of large language models for controlling robots. It investigates how these models can be used to interpret human commands and translate them into robotic actions. The study aims to develop intuitive and effective interfaces for human-robot collaboration, paving the way for more seamless and responsive robotic systems.",
     "poster_image": "res://assets/posters/poster_005.png",
+    "source_pdf": "RISE_Open_House_2025_LLM_Robot-Demo.pdf",
     "faq": [
       {
-        "question": "What's the payback period for implementation?",
-        "answer": "Based on pilot deployments, organizations see ROI within 8-12 months through reduced energy costs."
-      },
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_006",
+    "title": "The main title of the poster",
+    "authors": [
+      "Eriksson",
+      "Schroder"
+    ],
+    "tags": [
+      "Large Language Models",
+      "AI",
+      "Chatbots",
+      "Prompt Engineering",
+      "Large Language Models"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_6",
+    "abstract": "This poster presents a system for intelligent prompt engineering, enabling more effective interactions with Large Language Models. The system focuses on crafting optimized prompts, which are crucial for eliciting desired responses from LLMs, to enhance model performance and user experience.  It demonstrates the effectiveness of this approach in various applications including chatbots and virtual assistants.",
+    "poster_image": "res://assets/posters/poster_006.png",
+    "source_pdf": "RISE_Open_House_2025_MCP-LLM-IoT-Demo-v2.pdf",
+    "faq": [
       {
-        "question": "Does it work with existing infrastructure?",
-        "answer": "Yes, our solution integrates with standard building management systems and doesn't require hardware replacement."
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_007",
+    "title": "The main title of the poster",
+    "authors": [
+      "Joel Eriksson",
+      "Anja Seglat"
+    ],
+    "tags": [
+      "deep learning",
+      "edge computing",
+      "cybersecurity",
+      "energy",
+      "smart integration"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_7",
+    "abstract": "This research explores a novel framework for real-time data processing and analytics at the edge.  It integrates deep learning models with edge computing platforms, enabling real-time insights while reducing latency. The proposed solution prioritizes cybersecurity and energy efficiency, creating a robust and intelligent system for smart integration.",
+    "poster_image": "res://assets/posters/poster_007.png",
+    "source_pdf": "RISE_Poster_COP-Pilot.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_008",
+    "title": "The Main Title of the Poster",
+    "authors": [
+      "Author 1",
+      "Author 2"
+    ],
+    "tags": [
+      "topic1",
+      "topic2",
+      "topic3"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_8",
+    "abstract": "This poster presents a novel approach to translation with a focus on improving performance. The key contribution is a new model architecture designed to enhance the quality of translations.  The results demonstrate significant gains in translation accuracy compared to existing methods.",
+    "poster_image": "res://assets/posters/poster_008.png",
+    "source_pdf": "SWESAT-1.0 OpenHouse.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_009",
+    "title": "Graph Neural Network based anomaly detection",
+    "authors": [
+      "Author 1",
+      "Author 2"
+    ],
+    "tags": [
+      "Graph Neural Networks",
+      "Anomaly Detection",
+      "Deep Learning"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_9",
+    "abstract": "This poster introduces a novel approach for anomaly detection using Graph Neural Networks. The proposed method learns representations of complex data structures and identifies deviations from normal behavior.  It aims to provide more robust and accurate anomaly detection compared to traditional techniques.",
+    "poster_image": "res://assets/posters/poster_009.png",
+    "source_pdf": "Scazzariello-Poster-SEMLA.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_010",
+    "title": "The main title of the poster",
+    "authors": [
+      "Rahman",
+      "Voigt",
+      "Ko"
+    ],
+    "tags": [
+      "adaptive learning",
+      "deep learning",
+      "neural networks"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_10",
+    "abstract": "This poster investigates adaptive learning methods utilizing deep learning and neural networks for improved model training. The research explores novel architectures and training strategies to enhance model performance.  Ultimately, the goal is to develop more robust and efficient learning systems.",
+    "poster_image": "res://assets/posters/poster_010.png",
+    "source_pdf": "Shuai-Poster-2025.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
+      }
+    ]
+  },
+  {
+    "id": "poster_011",
+    "title": "Contiki-NG: The OS for Next Generation IoT Devices",
+    "authors": [
+      "Peter",
+      "Joakim"
+    ],
+    "tags": [
+      "low power communication",
+      "network protocols",
+      "energy efficient communication",
+      "wireless communication",
+      "data transmission"
+    ],
+    "room": "corridor",
+    "booth_id": "booth_11",
+    "abstract": "This research focuses on developing network protocols for efficient communication in resource-constrained environments. The key contribution is the design of protocols that minimize energy consumption while maintaining reliable data transmission.  These protocols aim to improve network performance and reduce the operational costs associated with communication systems.",
+    "poster_image": "res://assets/posters/poster_011.png",
+    "source_pdf": "contiki-ng-nicolas-tsiftes.pdf",
+    "faq": [
+      {
+        "question": "Where can I read more?",
+        "answer": "Please refer to the full paper or contact the authors for more details."
       }
     ]
   }
