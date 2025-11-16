@@ -61,7 +61,11 @@ func speak(text: String) -> void:
 		return
 
 	# Use first available voice (or could select by language/gender)
-	var voice_id = voices[0]
+	# voices[0] is a Dictionary with "id", "name", "language" fields
+	var voice_id = voices[0]["id"] if voices[0].has("id") else ""
+	if voice_id == "":
+		print("Invalid voice ID")
+		return
 
 	# Generate unique utterance ID
 	current_utterance_id += 1
