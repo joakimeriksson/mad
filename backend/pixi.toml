@@ -36,6 +36,8 @@ pytest-asyncio = ">=0.21.0"
 [pypi-dependencies]
 # Ollama client (not available on conda-forge)
 ollama = ">=0.1.0"
+# Edge TTS for high-quality text-to-speech
+edge-tts = ">=6.1.0"
 
 [feature.ollama.dependencies]
 # Optional: dependencies for Ollama mode

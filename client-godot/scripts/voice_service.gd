@@ -8,9 +8,12 @@ signal tts_finished
 
 # TTS Configuration
 @export var tts_enabled: bool = true
-@export var tts_volume: float = 50.0  # 0-100
-@export var tts_pitch: float = 1.0    # 0.5-2.0
-@export var tts_rate: float = 1.0     # 0.1-10.0
+@export var use_backend_tts: bool = true  # Use backend Edge TTS (better quality) vs local TTS
+@export var backend_url: String = "http://localhost:8000"
+@export var tts_voice: String = "en-US-female"  # For backend TTS
+@export var tts_volume: float = 50.0  # 0-100 (for local TTS only)
+@export var tts_pitch: float = 1.0    # 0.5-2.0 (for local TTS only)
+@export var tts_rate: float = 1.0     # 0.1-10.0 (for local TTS only)
 @export var tts_interrupt: bool = true
 
 # STT Configuration
@@ -21,35 +24,74 @@ signal tts_finished
 var current_utterance_id: int = 0
 # var audio_recorder  # TODO: Implement with AudioStreamMicrophone for STT
 var recording: bool = false
-var http_request: HTTPRequest
+var http_request_stt: HTTPRequest
+var http_request_tts: HTTPRequest
+var audio_player: AudioStreamPlayer
+var current_audio_file: String = ""
 
 
 func _ready() -> void:
 	# Check TTS availability
-	if tts_enabled and DisplayServer.tts_get_voices().size() > 0:
-		print("TTS available with ", DisplayServer.tts_get_voices().size(), " voices")
-
-		# Connect TTS signals if available
-		if not DisplayServer.tts_is_speaking():
-			pass  # TTS ready
+	if use_backend_tts:
+		print("Using backend Edge TTS for high-quality voices")
+	elif tts_enabled and DisplayServer.tts_get_voices().size() > 0:
+		print("Using local TTS with ", DisplayServer.tts_get_voices().size(), " voices")
 	else:
 		print("TTS not available on this platform")
 		tts_enabled = false
 
 	# Setup HTTP request for STT
-	http_request = HTTPRequest.new()
-	add_child(http_request)
-	http_request.request_completed.connect(_on_stt_request_completed)
+	http_request_stt = HTTPRequest.new()
+	add_child(http_request_stt)
+	http_request_stt.request_completed.connect(_on_stt_request_completed)
+
+	# Setup HTTP request for TTS (backend)
+	http_request_tts = HTTPRequest.new()
+	add_child(http_request_tts)
+	http_request_tts.request_completed.connect(_on_tts_request_completed)
+
+	# Setup audio player for backend TTS
+	audio_player = AudioStreamPlayer.new()
+	add_child(audio_player)
+	audio_player.finished.connect(_on_audio_finished)
 
 
 ## Text-to-Speech Functions
 
 func speak(text: String) -> void:
-	"""Convert text to speech using Godot's built-in TTS."""
+	"""Convert text to speech using either backend Edge TTS or local TTS."""
 	if not tts_enabled:
 		print("TTS is disabled")
 		return
 
+	if use_backend_tts:
+		_speak_backend(text)
+	else:
+		_speak_local(text)
+
+
+func _speak_backend(text: String) -> void:
+	"""Use backend Edge TTS for high-quality voice."""
+	# Stop any current playback
+	if audio_player.playing:
+		audio_player.stop()
+
+	# Make request to backend TTS endpoint
+	var url = backend_url + "/tts?text=" + text.uri_encode()
+	if tts_voice != "":
+		url += "&voice=" + tts_voice.uri_encode()
+
+	var error = http_request_tts.request(url, [], HTTPClient.METHOD_POST)
+
+	if error == OK:
+		tts_started.emit()
+		print("Requesting TTS from backend: ", text.substr(0, 50), "...")
+	else:
+		print("Failed to request TTS: ", error)
+
+
+func _speak_local(text: String) -> void:
+	"""Use Godot's built-in TTS (lower quality)."""
 	# Stop any current speech if interrupt is enabled
 	if tts_interrupt and DisplayServer.tts_is_speaking():
 		DisplayServer.tts_stop()
@@ -87,14 +129,21 @@ func speak(text: String) -> void:
 
 func stop_speaking() -> void:
 	"""Stop current TTS playback."""
-	if tts_enabled:
+	if use_backend_tts:
+		if audio_player and audio_player.playing:
+			audio_player.stop()
+			tts_finished.emit()
+	elif tts_enabled:
 		DisplayServer.tts_stop()
 		tts_finished.emit()
 
 
 func is_speaking() -> bool:
 	"""Check if TTS is currently speaking."""
-	return tts_enabled and DisplayServer.tts_is_speaking()
+	if use_backend_tts:
+		return audio_player and audio_player.playing
+	else:
+		return tts_enabled and DisplayServer.tts_is_speaking()
 
 
 func get_available_voices() -> Array:
@@ -167,6 +216,42 @@ func send_audio_to_whisper(audio_file_path: String) -> void:
 
 	# Make request (implementation needed)
 	print("STT: Would send audio to: ", whisper_api_url)
+
+
+func _on_tts_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:
+	"""Handle TTS API response - play the received audio file."""
+	if result != HTTPRequest.RESULT_SUCCESS:
+		print("TTS request failed: ", result)
+		return
+
+	if response_code != 200:
+		print("TTS response code: ", response_code)
+		return
+
+	# Save audio to temporary file
+	var temp_dir = OS.get_user_data_dir()
+	current_audio_file = temp_dir + "/temp_tts.mp3"
+
+	var file = FileAccess.open(current_audio_file, FileAccess.WRITE)
+	if file:
+		file.store_buffer(body)
+		file.close()
+
+		# Load and play audio
+		var audio_stream = AudioStreamMP3.new()
+		audio_stream.data = body
+
+		audio_player.stream = audio_stream
+		audio_player.play()
+		print("Playing TTS audio...")
+	else:
+		print("Failed to save TTS audio file")
+
+
+func _on_audio_finished() -> void:
+	"""Called when TTS audio playback finishes."""
+	tts_finished.emit()
+	print("TTS audio finished")
 
 
 func _on_stt_request_completed(result: int, response_code: int, headers: PackedStringArray, body: PackedByteArray) -> void:

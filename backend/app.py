@@ -9,11 +9,13 @@ from pathlib import Path
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from dotenv import load_dotenv
 
 from agents import PosterHostAgent, GuideAgent
 from agents.ollama_service import OllamaService
+from tts_service import TTSService
 
 # Load environment variables
 load_dotenv()
@@ -42,6 +44,7 @@ posters_data = []
 poster_agents: Dict[str, PosterHostAgent] = {}
 guide_agent: Optional[GuideAgent] = None
 ollama_service: Optional[OllamaService] = None
+tts_service: Optional[TTSService] = None
 
 
 def load_posters():
@@ -96,8 +99,14 @@ def initialize_agents():
 @app.on_event("startup")
 async def startup_event():
     """Initialize data and agents on startup."""
+    global tts_service
+
     load_posters()
     initialize_agents()
+
+    # Initialize TTS service
+    tts_service = TTSService(default_voice="en-US-female")
+    print("✓ TTS service initialized")
 
     # Check Ollama connection if in ollama mode
     if ollama_service:
@@ -212,6 +221,44 @@ async def interact_with_agent(request: AgentRequest):
         )
 
 
+@app.post("/tts")
+async def text_to_speech(text: str, voice: Optional[str] = None):
+    """
+    Convert text to speech and return audio file.
+
+    Args:
+        text: Text to convert to speech
+        voice: Voice to use (optional, uses default if not provided)
+
+    Returns:
+        MP3 audio file
+    """
+    if not tts_service:
+        raise HTTPException(status_code=500, detail="TTS service not initialized")
+
+    try:
+        audio_file = await tts_service.generate_speech(text, voice=voice)
+        return FileResponse(
+            path=str(audio_file),
+            media_type="audio/mpeg",
+            filename="speech.mp3"
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"TTS error: {str(e)}")
+
+
+@app.get("/tts/voices")
+async def list_tts_voices():
+    """List available TTS voices."""
+    if not tts_service:
+        raise HTTPException(status_code=500, detail="TTS service not initialized")
+
+    return {
+        "default_voices": TTSService.VOICES,
+        "default": tts_service.default_voice
+    }
+
+
 @app.get("/health")
 async def health_check():
     """Health check endpoint."""
@@ -220,11 +267,14 @@ async def health_check():
         is_connected = await ollama_service.check_connection()
         ollama_status = "connected" if is_connected else "disconnected"
 
+    tts_status = "initialized" if tts_service else "not_initialized"
+
     return {
         "status": "healthy",
         "posters_loaded": len(posters_data),
         "agents_initialized": len(poster_agents) + (1 if guide_agent else 0),
         "ollama_status": ollama_status,
+        "tts_status": tts_status,
     }
 
 
